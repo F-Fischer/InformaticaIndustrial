@@ -1,0 +1,1009 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="articulo">
+          <Key>
+            <PropertyRef Name="articulo_id" />
+          </Key>
+          <Property Name="articulo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_id" Type="int" Nullable="false" />
+          <Property Name="precio_std" Type="float" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="tipo_articulo" Type="int" Nullable="false" />
+          <Property Name="unidad_med" Type="int" Nullable="false" />
+          <Property Name="fecha_inicio" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="fecha_fin" Type="datetime" Precision="0" />
+          <Property Name="registro_id" Type="int" />
+        </EntityType>
+        <EntityType Name="bom">
+          <Key>
+            <PropertyRef Name="bom_id" />
+          </Key>
+          <Property Name="bom_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="articulo_padre" Type="int" Nullable="false" />
+          <Property Name="articulo_hijo" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="float" Nullable="false" />
+          <Property Name="fecha_inicio" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="fecha_fin" Type="datetime" Precision="0" />
+          <Property Name="um_id" Type="int" Nullable="false" />
+          <Property Name="registro_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="descripcion">
+          <Key>
+            <PropertyRef Name="descripcion_id" />
+          </Key>
+          <Property Name="descripcion_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lenguaje_id" Type="int" Nullable="false" />
+          <Property Name="descripcion_str" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="externos">
+          <Key>
+            <PropertyRef Name="ext_id" />
+          </Key>
+          <Property Name="ext_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_ext_id" Type="int" Nullable="false" />
+          <Property Name="descripcion_id" Type="int" Nullable="false" />
+          <Property Name="CUIT" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="direccion_id" Type="int" Nullable="false" />
+          <Property Name="direccion_ent_id" Type="int" Nullable="false" />
+          <Property Name="direccion_fac_id" Type="int" Nullable="false" />
+          <Property Name="nac_ext" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lenguaje">
+          <Key>
+            <PropertyRef Name="lenguaje_id" />
+          </Key>
+          <Property Name="lenguaje_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lenguaje_desc" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="registros">
+          <Key>
+            <PropertyRef Name="registro_id" />
+          </Key>
+          <Property Name="registro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_mod" Type="int" Nullable="false" />
+          <Property Name="terminal" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="usuario_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="rol_id" />
+          </Key>
+          <Property Name="rol_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_articulo">
+          <Key>
+            <PropertyRef Name="tipo_id" />
+          </Key>
+          <Property Name="tipo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_externos">
+          <Key>
+            <PropertyRef Name="tipo_ext_id" />
+          </Key>
+          <Property Name="tipo_ext_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="unidad_med">
+          <Key>
+            <PropertyRef Name="unidad_id" />
+          </Key>
+          <Property Name="unidad_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion_id" Type="int" Nullable="false" />
+          <Property Name="factor_n" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuarios">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+          </Key>
+          <Property Name="usuario_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellido" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="sector" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="rol_id" Type="int" Nullable="false" />
+          <Property Name="interno" Type="int" Nullable="false" />
+          <Property Name="mail" Type="varchar" MaxLength="45" />
+          <Property Name="lenguaje_id" Type="int" />
+        </EntityType>
+        <Association Name="articulo_id_descripcion">
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
+          <End Role="articulo" Type="Self.articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descripcion">
+              <PropertyRef Name="descripcion_id" />
+            </Principal>
+            <Dependent Role="articulo">
+              <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="articulo_id_registro">
+          <End Role="registros" Type="Self.registros" Multiplicity="0..1" />
+          <End Role="articulo" Type="Self.articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registros">
+              <PropertyRef Name="registro_id" />
+            </Principal>
+            <Dependent Role="articulo">
+              <PropertyRef Name="registro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="articulo_tipo_articulo">
+          <End Role="tipo_articulo" Type="Self.tipo_articulo" Multiplicity="1" />
+          <End Role="articulo" Type="Self.articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_articulo">
+              <PropertyRef Name="tipo_id" />
+            </Principal>
+            <Dependent Role="articulo">
+              <PropertyRef Name="tipo_articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="articulo_um_id">
+          <End Role="unidad_med" Type="Self.unidad_med" Multiplicity="1" />
+          <End Role="articulo" Type="Self.articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unidad_med">
+              <PropertyRef Name="unidad_id" />
+            </Principal>
+            <Dependent Role="articulo">
+              <PropertyRef Name="unidad_med" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bom_id_hijo">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1" />
+          <End Role="bom" Type="Self.bom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="articulo_id" />
+            </Principal>
+            <Dependent Role="bom">
+              <PropertyRef Name="articulo_hijo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bom_id_padre">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1" />
+          <End Role="bom" Type="Self.bom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="articulo_id" />
+            </Principal>
+            <Dependent Role="bom">
+              <PropertyRef Name="articulo_padre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bom_registro">
+          <End Role="registros" Type="Self.registros" Multiplicity="1" />
+          <End Role="bom" Type="Self.bom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registros">
+              <PropertyRef Name="registro_id" />
+            </Principal>
+            <Dependent Role="bom">
+              <PropertyRef Name="registro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bom_um">
+          <End Role="unidad_med" Type="Self.unidad_med" Multiplicity="1" />
+          <End Role="bom" Type="Self.bom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unidad_med">
+              <PropertyRef Name="unidad_id" />
+            </Principal>
+            <Dependent Role="bom">
+              <PropertyRef Name="um_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="descripcion1">
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
+          <End Role="externos" Type="Self.externos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descripcion">
+              <PropertyRef Name="descripcion_id" />
+            </Principal>
+            <Dependent Role="externos">
+              <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_externo">
+          <End Role="tipo_externos" Type="Self.tipo_externos" Multiplicity="1" />
+          <End Role="externos" Type="Self.externos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_externos">
+              <PropertyRef Name="tipo_ext_id" />
+            </Principal>
+            <Dependent Role="externos">
+              <PropertyRef Name="tipo_ext_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_usuario">
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+          <End Role="registros" Type="Self.registros" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="registros">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="lenguaje_desc">
+          <End Role="lenguaje" Type="Self.lenguaje" Multiplicity="1" />
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lenguaje">
+              <PropertyRef Name="lenguaje_id" />
+            </Principal>
+            <Dependent Role="descripcion">
+              <PropertyRef Name="lenguaje_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rol_ibfk_1">
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
+          <End Role="rol" Type="Self.rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descripcion">
+              <PropertyRef Name="descripcion_id" />
+            </Principal>
+            <Dependent Role="rol">
+              <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tipo_articulo_desc">
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
+          <End Role="tipo_articulo" Type="Self.tipo_articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descripcion">
+              <PropertyRef Name="descripcion_id" />
+            </Principal>
+            <Dependent Role="tipo_articulo">
+              <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tipo_externo_desc">
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
+          <End Role="tipo_externos" Type="Self.tipo_externos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descripcion">
+              <PropertyRef Name="descripcion_id" />
+            </Principal>
+            <Dependent Role="tipo_externos">
+              <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="um_desc">
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
+          <End Role="unidad_med" Type="Self.unidad_med" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descripcion">
+              <PropertyRef Name="descripcion_id" />
+            </Principal>
+            <Dependent Role="unidad_med">
+              <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usuario_leng">
+          <End Role="lenguaje" Type="Self.lenguaje" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lenguaje">
+              <PropertyRef Name="lenguaje_id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="lenguaje_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usuario_rol">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="rol_id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbModelStoreContainer">
+          <EntitySet Name="articulo" EntityType="Self.articulo" Schema="db_ii" store:Type="Tables" />
+          <EntitySet Name="bom" EntityType="Self.bom" Schema="db_ii" store:Type="Tables" />
+          <EntitySet Name="descripcion" EntityType="Self.descripcion" Schema="db_ii" store:Type="Tables" />
+          <EntitySet Name="externos" EntityType="Self.externos" Schema="db_ii" store:Type="Tables" />
+          <EntitySet Name="lenguaje" EntityType="Self.lenguaje" Schema="db_ii" store:Type="Tables" />
+          <EntitySet Name="registros" EntityType="Self.registros" Schema="db_ii" store:Type="Tables" />
+          <EntitySet Name="rol" EntityType="Self.rol" Schema="db_ii" store:Type="Tables" />
+          <EntitySet Name="tipo_articulo" EntityType="Self.tipo_articulo" Schema="db_ii" store:Type="Tables" />
+          <EntitySet Name="tipo_externos" EntityType="Self.tipo_externos" Schema="db_ii" store:Type="Tables" />
+          <EntitySet Name="unidad_med" EntityType="Self.unidad_med" Schema="db_ii" store:Type="Tables" />
+          <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="db_ii" store:Type="Tables" />
+          <AssociationSet Name="articulo_id_descripcion" Association="Self.articulo_id_descripcion">
+            <End Role="descripcion" EntitySet="descripcion" />
+            <End Role="articulo" EntitySet="articulo" />
+          </AssociationSet>
+          <AssociationSet Name="articulo_id_registro" Association="Self.articulo_id_registro">
+            <End Role="registros" EntitySet="registros" />
+            <End Role="articulo" EntitySet="articulo" />
+          </AssociationSet>
+          <AssociationSet Name="articulo_tipo_articulo" Association="Self.articulo_tipo_articulo">
+            <End Role="tipo_articulo" EntitySet="tipo_articulo" />
+            <End Role="articulo" EntitySet="articulo" />
+          </AssociationSet>
+          <AssociationSet Name="articulo_um_id" Association="Self.articulo_um_id">
+            <End Role="unidad_med" EntitySet="unidad_med" />
+            <End Role="articulo" EntitySet="articulo" />
+          </AssociationSet>
+          <AssociationSet Name="bom_id_hijo" Association="Self.bom_id_hijo">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="bom" EntitySet="bom" />
+          </AssociationSet>
+          <AssociationSet Name="bom_id_padre" Association="Self.bom_id_padre">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="bom" EntitySet="bom" />
+          </AssociationSet>
+          <AssociationSet Name="bom_registro" Association="Self.bom_registro">
+            <End Role="registros" EntitySet="registros" />
+            <End Role="bom" EntitySet="bom" />
+          </AssociationSet>
+          <AssociationSet Name="bom_um" Association="Self.bom_um">
+            <End Role="unidad_med" EntitySet="unidad_med" />
+            <End Role="bom" EntitySet="bom" />
+          </AssociationSet>
+          <AssociationSet Name="descripcion1" Association="Self.descripcion1">
+            <End Role="descripcion" EntitySet="descripcion" />
+            <End Role="externos" EntitySet="externos" />
+          </AssociationSet>
+          <AssociationSet Name="id_externo" Association="Self.id_externo">
+            <End Role="tipo_externos" EntitySet="tipo_externos" />
+            <End Role="externos" EntitySet="externos" />
+          </AssociationSet>
+          <AssociationSet Name="id_usuario" Association="Self.id_usuario">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="registros" EntitySet="registros" />
+          </AssociationSet>
+          <AssociationSet Name="lenguaje_desc" Association="Self.lenguaje_desc">
+            <End Role="lenguaje" EntitySet="lenguaje" />
+            <End Role="descripcion" EntitySet="descripcion" />
+          </AssociationSet>
+          <AssociationSet Name="rol_ibfk_1" Association="Self.rol_ibfk_1">
+            <End Role="descripcion" EntitySet="descripcion" />
+            <End Role="rol" EntitySet="rol" />
+          </AssociationSet>
+          <AssociationSet Name="tipo_articulo_desc" Association="Self.tipo_articulo_desc">
+            <End Role="descripcion" EntitySet="descripcion" />
+            <End Role="tipo_articulo" EntitySet="tipo_articulo" />
+          </AssociationSet>
+          <AssociationSet Name="tipo_externo_desc" Association="Self.tipo_externo_desc">
+            <End Role="descripcion" EntitySet="descripcion" />
+            <End Role="tipo_externos" EntitySet="tipo_externos" />
+          </AssociationSet>
+          <AssociationSet Name="um_desc" Association="Self.um_desc">
+            <End Role="descripcion" EntitySet="descripcion" />
+            <End Role="unidad_med" EntitySet="unidad_med" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_leng" Association="Self.usuario_leng">
+            <End Role="lenguaje" EntitySet="lenguaje" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_rol" Association="Self.usuario_rol">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="articulo">
+          <Key>
+            <PropertyRef Name="articulo_id" />
+          </Key>
+          <Property Name="articulo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_id" Type="Int32" Nullable="false" />
+          <Property Name="precio_std" Type="Single" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_articulo" Type="Int32" Nullable="false" />
+          <Property Name="unidad_med" Type="Int32" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" />
+          <Property Name="fecha_fin" Type="DateTime" />
+          <Property Name="registro_id" Type="Int32" />
+          <NavigationProperty Name="descripcion1" Relationship="Self.articulo_id_descripcion" FromRole="articulo" ToRole="descripcion" />
+          <NavigationProperty Name="registro" Relationship="Self.articulo_id_registro" FromRole="articulo" ToRole="registros" />
+          <NavigationProperty Name="tipo_articulo1" Relationship="Self.articulo_tipo_articulo" FromRole="articulo" ToRole="tipo_articulo" />
+          <NavigationProperty Name="unidad_med1" Relationship="Self.articulo_um_id" FromRole="articulo" ToRole="unidad_med" />
+          <NavigationProperty Name="boms" Relationship="Self.bom_id_hijo" FromRole="articulo" ToRole="bom" />
+          <NavigationProperty Name="boms1" Relationship="Self.bom_id_padre" FromRole="articulo" ToRole="bom" />
+        </EntityType>
+        <EntityType Name="bom">
+          <Key>
+            <PropertyRef Name="bom_id" />
+          </Key>
+          <Property Name="bom_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="articulo_padre" Type="Int32" Nullable="false" />
+          <Property Name="articulo_hijo" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Single" Nullable="false" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" />
+          <Property Name="fecha_fin" Type="DateTime" />
+          <Property Name="um_id" Type="Int32" Nullable="false" />
+          <Property Name="registro_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="articulo" Relationship="Self.bom_id_hijo" FromRole="bom" ToRole="articulo" />
+          <NavigationProperty Name="articulo1" Relationship="Self.bom_id_padre" FromRole="bom" ToRole="articulo" />
+          <NavigationProperty Name="registro" Relationship="Self.bom_registro" FromRole="bom" ToRole="registros" />
+          <NavigationProperty Name="unidad_med" Relationship="Self.bom_um" FromRole="bom" ToRole="unidad_med" />
+        </EntityType>
+        <EntityType Name="descripcion">
+          <Key>
+            <PropertyRef Name="descripcion_id" />
+          </Key>
+          <Property Name="descripcion_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lenguaje_id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion_str" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="articuloes" Relationship="Self.articulo_id_descripcion" FromRole="descripcion" ToRole="articulo" />
+          <NavigationProperty Name="externos" Relationship="Self.descripcion1" FromRole="descripcion" ToRole="externos" />
+          <NavigationProperty Name="lenguaje" Relationship="Self.lenguaje_desc" FromRole="descripcion" ToRole="lenguaje" />
+          <NavigationProperty Name="rols" Relationship="Self.rol_ibfk_1" FromRole="descripcion" ToRole="rol" />
+          <NavigationProperty Name="tipo_articulo" Relationship="Self.tipo_articulo_desc" FromRole="descripcion" ToRole="tipo_articulo" />
+          <NavigationProperty Name="tipo_externos" Relationship="Self.tipo_externo_desc" FromRole="descripcion" ToRole="tipo_externos" />
+          <NavigationProperty Name="unidad_med" Relationship="Self.um_desc" FromRole="descripcion" ToRole="unidad_med" />
+        </EntityType>
+        <EntityType Name="externo">
+          <Key>
+            <PropertyRef Name="ext_id" />
+          </Key>
+          <Property Name="ext_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_ext_id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion_id" Type="Int32" Nullable="false" />
+          <Property Name="CUIT" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="direccion_id" Type="Int32" Nullable="false" />
+          <Property Name="direccion_ent_id" Type="Int32" Nullable="false" />
+          <Property Name="direccion_fac_id" Type="Int32" Nullable="false" />
+          <Property Name="nac_ext" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="descripcion" Relationship="Self.descripcion1" FromRole="externos" ToRole="descripcion" />
+          <NavigationProperty Name="tipo_externos" Relationship="Self.id_externo" FromRole="externos" ToRole="tipo_externos" />
+        </EntityType>
+        <EntityType Name="lenguaje">
+          <Key>
+            <PropertyRef Name="lenguaje_id" />
+          </Key>
+          <Property Name="lenguaje_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lenguaje_desc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="descripcions" Relationship="Self.lenguaje_desc" FromRole="lenguaje" ToRole="descripcion" />
+          <NavigationProperty Name="usuarios" Relationship="Self.usuario_leng" FromRole="lenguaje" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="registro">
+          <Key>
+            <PropertyRef Name="registro_id" />
+          </Key>
+          <Property Name="registro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_mod" Type="Int32" Nullable="false" />
+          <Property Name="terminal" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuario_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="articuloes" Relationship="Self.articulo_id_registro" FromRole="registros" ToRole="articulo" />
+          <NavigationProperty Name="boms" Relationship="Self.bom_registro" FromRole="registros" ToRole="bom" />
+          <NavigationProperty Name="usuario" Relationship="Self.id_usuario" FromRole="registros" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="rol_id" />
+          </Key>
+          <Property Name="rol_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="descripcion" Relationship="Self.rol_ibfk_1" FromRole="rol" ToRole="descripcion" />
+          <NavigationProperty Name="usuarios" Relationship="Self.usuario_rol" FromRole="rol" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="tipo_articulo">
+          <Key>
+            <PropertyRef Name="tipo_id" />
+          </Key>
+          <Property Name="tipo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="articuloes" Relationship="Self.articulo_tipo_articulo" FromRole="tipo_articulo" ToRole="articulo" />
+          <NavigationProperty Name="descripcion" Relationship="Self.tipo_articulo_desc" FromRole="tipo_articulo" ToRole="descripcion" />
+        </EntityType>
+        <EntityType Name="tipo_externos">
+          <Key>
+            <PropertyRef Name="tipo_ext_id" />
+          </Key>
+          <Property Name="tipo_ext_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="descripcion" Relationship="Self.tipo_externo_desc" FromRole="tipo_externos" ToRole="descripcion" />
+          <NavigationProperty Name="externos" Relationship="Self.id_externo" FromRole="tipo_externos" ToRole="externos" />
+        </EntityType>
+        <EntityType Name="unidad_med">
+          <Key>
+            <PropertyRef Name="unidad_id" />
+          </Key>
+          <Property Name="unidad_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion_id" Type="Int32" Nullable="false" />
+          <Property Name="factor_n" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="articuloes" Relationship="Self.articulo_um_id" FromRole="unidad_med" ToRole="articulo" />
+          <NavigationProperty Name="boms" Relationship="Self.bom_um" FromRole="unidad_med" ToRole="bom" />
+          <NavigationProperty Name="descripcion" Relationship="Self.um_desc" FromRole="unidad_med" ToRole="descripcion" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+          </Key>
+          <Property Name="usuario_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sector" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rol_id" Type="Int32" Nullable="false" />
+          <Property Name="interno" Type="Int32" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="lenguaje_id" Type="Int32" />
+          <NavigationProperty Name="lenguaje" Relationship="Self.usuario_leng" FromRole="usuarios" ToRole="lenguaje" />
+          <NavigationProperty Name="registros" Relationship="Self.id_usuario" FromRole="usuarios" ToRole="registros" />
+          <NavigationProperty Name="rol" Relationship="Self.usuario_rol" FromRole="usuarios" ToRole="rol" />
+        </EntityType>
+        <Association Name="articulo_id_descripcion">
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
+          <End Role="articulo" Type="Self.articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descripcion">
+              <PropertyRef Name="descripcion_id" />
+            </Principal>
+            <Dependent Role="articulo">
+              <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="articulo_id_registro">
+          <End Role="registros" Type="Self.registro" Multiplicity="0..1" />
+          <End Role="articulo" Type="Self.articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registros">
+              <PropertyRef Name="registro_id" />
+            </Principal>
+            <Dependent Role="articulo">
+              <PropertyRef Name="registro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="articulo_tipo_articulo">
+          <End Role="tipo_articulo" Type="Self.tipo_articulo" Multiplicity="1" />
+          <End Role="articulo" Type="Self.articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_articulo">
+              <PropertyRef Name="tipo_id" />
+            </Principal>
+            <Dependent Role="articulo">
+              <PropertyRef Name="tipo_articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="articulo_um_id">
+          <End Role="unidad_med" Type="Self.unidad_med" Multiplicity="1" />
+          <End Role="articulo" Type="Self.articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unidad_med">
+              <PropertyRef Name="unidad_id" />
+            </Principal>
+            <Dependent Role="articulo">
+              <PropertyRef Name="unidad_med" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bom_id_hijo">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1" />
+          <End Role="bom" Type="Self.bom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="articulo_id" />
+            </Principal>
+            <Dependent Role="bom">
+              <PropertyRef Name="articulo_hijo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bom_id_padre">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1" />
+          <End Role="bom" Type="Self.bom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="articulo_id" />
+            </Principal>
+            <Dependent Role="bom">
+              <PropertyRef Name="articulo_padre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bom_registro">
+          <End Role="registros" Type="Self.registro" Multiplicity="1" />
+          <End Role="bom" Type="Self.bom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registros">
+              <PropertyRef Name="registro_id" />
+            </Principal>
+            <Dependent Role="bom">
+              <PropertyRef Name="registro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bom_um">
+          <End Role="unidad_med" Type="Self.unidad_med" Multiplicity="1" />
+          <End Role="bom" Type="Self.bom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unidad_med">
+              <PropertyRef Name="unidad_id" />
+            </Principal>
+            <Dependent Role="bom">
+              <PropertyRef Name="um_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="descripcion1">
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
+          <End Role="externos" Type="Self.externo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descripcion">
+              <PropertyRef Name="descripcion_id" />
+            </Principal>
+            <Dependent Role="externos">
+              <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="lenguaje_desc">
+          <End Role="lenguaje" Type="Self.lenguaje" Multiplicity="1" />
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lenguaje">
+              <PropertyRef Name="lenguaje_id" />
+            </Principal>
+            <Dependent Role="descripcion">
+              <PropertyRef Name="lenguaje_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rol_ibfk_1">
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
+          <End Role="rol" Type="Self.rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descripcion">
+              <PropertyRef Name="descripcion_id" />
+            </Principal>
+            <Dependent Role="rol">
+              <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tipo_articulo_desc">
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
+          <End Role="tipo_articulo" Type="Self.tipo_articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descripcion">
+              <PropertyRef Name="descripcion_id" />
+            </Principal>
+            <Dependent Role="tipo_articulo">
+              <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tipo_externo_desc">
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
+          <End Role="tipo_externos" Type="Self.tipo_externos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descripcion">
+              <PropertyRef Name="descripcion_id" />
+            </Principal>
+            <Dependent Role="tipo_externos">
+              <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="um_desc">
+          <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
+          <End Role="unidad_med" Type="Self.unidad_med" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="descripcion">
+              <PropertyRef Name="descripcion_id" />
+            </Principal>
+            <Dependent Role="unidad_med">
+              <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_externo">
+          <End Role="tipo_externos" Type="Self.tipo_externos" Multiplicity="1" />
+          <End Role="externos" Type="Self.externo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_externos">
+              <PropertyRef Name="tipo_ext_id" />
+            </Principal>
+            <Dependent Role="externos">
+              <PropertyRef Name="tipo_ext_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usuario_leng">
+          <End Role="lenguaje" Type="Self.lenguaje" Multiplicity="0..1" />
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lenguaje">
+              <PropertyRef Name="lenguaje_id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="lenguaje_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="id_usuario">
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="1" />
+          <End Role="registros" Type="Self.registro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuarios">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="registros">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="usuario_rol">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="usuarios" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="rol_id" />
+            </Principal>
+            <Dependent Role="usuarios">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="articuloes" EntityType="Self.articulo" />
+          <EntitySet Name="boms" EntityType="Self.bom" />
+          <EntitySet Name="descripcions" EntityType="Self.descripcion" />
+          <EntitySet Name="externos" EntityType="Self.externo" />
+          <EntitySet Name="lenguajes" EntityType="Self.lenguaje" />
+          <EntitySet Name="registros" EntityType="Self.registro" />
+          <EntitySet Name="rols" EntityType="Self.rol" />
+          <EntitySet Name="tipo_articulo" EntityType="Self.tipo_articulo" />
+          <EntitySet Name="tipo_externos" EntityType="Self.tipo_externos" />
+          <EntitySet Name="unidad_med" EntityType="Self.unidad_med" />
+          <EntitySet Name="usuarios" EntityType="Self.usuario" />
+          <AssociationSet Name="articulo_id_descripcion" Association="Self.articulo_id_descripcion">
+            <End Role="descripcion" EntitySet="descripcions" />
+            <End Role="articulo" EntitySet="articuloes" />
+          </AssociationSet>
+          <AssociationSet Name="articulo_id_registro" Association="Self.articulo_id_registro">
+            <End Role="registros" EntitySet="registros" />
+            <End Role="articulo" EntitySet="articuloes" />
+          </AssociationSet>
+          <AssociationSet Name="articulo_tipo_articulo" Association="Self.articulo_tipo_articulo">
+            <End Role="tipo_articulo" EntitySet="tipo_articulo" />
+            <End Role="articulo" EntitySet="articuloes" />
+          </AssociationSet>
+          <AssociationSet Name="articulo_um_id" Association="Self.articulo_um_id">
+            <End Role="unidad_med" EntitySet="unidad_med" />
+            <End Role="articulo" EntitySet="articuloes" />
+          </AssociationSet>
+          <AssociationSet Name="bom_id_hijo" Association="Self.bom_id_hijo">
+            <End Role="articulo" EntitySet="articuloes" />
+            <End Role="bom" EntitySet="boms" />
+          </AssociationSet>
+          <AssociationSet Name="bom_id_padre" Association="Self.bom_id_padre">
+            <End Role="articulo" EntitySet="articuloes" />
+            <End Role="bom" EntitySet="boms" />
+          </AssociationSet>
+          <AssociationSet Name="bom_registro" Association="Self.bom_registro">
+            <End Role="registros" EntitySet="registros" />
+            <End Role="bom" EntitySet="boms" />
+          </AssociationSet>
+          <AssociationSet Name="bom_um" Association="Self.bom_um">
+            <End Role="unidad_med" EntitySet="unidad_med" />
+            <End Role="bom" EntitySet="boms" />
+          </AssociationSet>
+          <AssociationSet Name="descripcion1" Association="Self.descripcion1">
+            <End Role="descripcion" EntitySet="descripcions" />
+            <End Role="externos" EntitySet="externos" />
+          </AssociationSet>
+          <AssociationSet Name="lenguaje_desc" Association="Self.lenguaje_desc">
+            <End Role="lenguaje" EntitySet="lenguajes" />
+            <End Role="descripcion" EntitySet="descripcions" />
+          </AssociationSet>
+          <AssociationSet Name="rol_ibfk_1" Association="Self.rol_ibfk_1">
+            <End Role="descripcion" EntitySet="descripcions" />
+            <End Role="rol" EntitySet="rols" />
+          </AssociationSet>
+          <AssociationSet Name="tipo_articulo_desc" Association="Self.tipo_articulo_desc">
+            <End Role="descripcion" EntitySet="descripcions" />
+            <End Role="tipo_articulo" EntitySet="tipo_articulo" />
+          </AssociationSet>
+          <AssociationSet Name="tipo_externo_desc" Association="Self.tipo_externo_desc">
+            <End Role="descripcion" EntitySet="descripcions" />
+            <End Role="tipo_externos" EntitySet="tipo_externos" />
+          </AssociationSet>
+          <AssociationSet Name="um_desc" Association="Self.um_desc">
+            <End Role="descripcion" EntitySet="descripcions" />
+            <End Role="unidad_med" EntitySet="unidad_med" />
+          </AssociationSet>
+          <AssociationSet Name="id_externo" Association="Self.id_externo">
+            <End Role="tipo_externos" EntitySet="tipo_externos" />
+            <End Role="externos" EntitySet="externos" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_leng" Association="Self.usuario_leng">
+            <End Role="lenguaje" EntitySet="lenguajes" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="id_usuario" Association="Self.id_usuario">
+            <End Role="usuarios" EntitySet="usuarios" />
+            <End Role="registros" EntitySet="registros" />
+          </AssociationSet>
+          <AssociationSet Name="usuario_rol" Association="Self.usuario_rol">
+            <End Role="rol" EntitySet="rols" />
+            <End Role="usuarios" EntitySet="usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbEntities">
+          <EntitySetMapping Name="articuloes">
+            <EntityTypeMapping TypeName="dbModel.articulo">
+              <MappingFragment StoreEntitySet="articulo">
+                <ScalarProperty Name="articulo_id" ColumnName="articulo_id" />
+                <ScalarProperty Name="descripcion_id" ColumnName="descripcion_id" />
+                <ScalarProperty Name="precio_std" ColumnName="precio_std" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="tipo_articulo" ColumnName="tipo_articulo" />
+                <ScalarProperty Name="unidad_med" ColumnName="unidad_med" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="registro_id" ColumnName="registro_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="boms">
+            <EntityTypeMapping TypeName="dbModel.bom">
+              <MappingFragment StoreEntitySet="bom">
+                <ScalarProperty Name="bom_id" ColumnName="bom_id" />
+                <ScalarProperty Name="articulo_padre" ColumnName="articulo_padre" />
+                <ScalarProperty Name="articulo_hijo" ColumnName="articulo_hijo" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+                <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+                <ScalarProperty Name="um_id" ColumnName="um_id" />
+                <ScalarProperty Name="registro_id" ColumnName="registro_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="descripcions">
+            <EntityTypeMapping TypeName="dbModel.descripcion">
+              <MappingFragment StoreEntitySet="descripcion">
+                <ScalarProperty Name="descripcion_id" ColumnName="descripcion_id" />
+                <ScalarProperty Name="lenguaje_id" ColumnName="lenguaje_id" />
+                <ScalarProperty Name="descripcion_str" ColumnName="descripcion_str" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="externos">
+            <EntityTypeMapping TypeName="dbModel.externo">
+              <MappingFragment StoreEntitySet="externos">
+                <ScalarProperty Name="ext_id" ColumnName="ext_id" />
+                <ScalarProperty Name="tipo_ext_id" ColumnName="tipo_ext_id" />
+                <ScalarProperty Name="descripcion_id" ColumnName="descripcion_id" />
+                <ScalarProperty Name="CUIT" ColumnName="CUIT" />
+                <ScalarProperty Name="direccion_id" ColumnName="direccion_id" />
+                <ScalarProperty Name="direccion_ent_id" ColumnName="direccion_ent_id" />
+                <ScalarProperty Name="direccion_fac_id" ColumnName="direccion_fac_id" />
+                <ScalarProperty Name="nac_ext" ColumnName="nac_ext" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lenguajes">
+            <EntityTypeMapping TypeName="dbModel.lenguaje">
+              <MappingFragment StoreEntitySet="lenguaje">
+                <ScalarProperty Name="lenguaje_id" ColumnName="lenguaje_id" />
+                <ScalarProperty Name="lenguaje_desc" ColumnName="lenguaje_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="registros">
+            <EntityTypeMapping TypeName="dbModel.registro">
+              <MappingFragment StoreEntitySet="registros">
+                <ScalarProperty Name="registro_id" ColumnName="registro_id" />
+                <ScalarProperty Name="fecha_mod" ColumnName="fecha_mod" />
+                <ScalarProperty Name="terminal" ColumnName="terminal" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rols">
+            <EntityTypeMapping TypeName="dbModel.rol">
+              <MappingFragment StoreEntitySet="rol">
+                <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+                <ScalarProperty Name="descripcion_id" ColumnName="descripcion_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_articulo">
+            <EntityTypeMapping TypeName="dbModel.tipo_articulo">
+              <MappingFragment StoreEntitySet="tipo_articulo">
+                <ScalarProperty Name="tipo_id" ColumnName="tipo_id" />
+                <ScalarProperty Name="descripcion_id" ColumnName="descripcion_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_externos">
+            <EntityTypeMapping TypeName="dbModel.tipo_externos">
+              <MappingFragment StoreEntitySet="tipo_externos">
+                <ScalarProperty Name="tipo_ext_id" ColumnName="tipo_ext_id" />
+                <ScalarProperty Name="descripcion_id" ColumnName="descripcion_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="unidad_med">
+            <EntityTypeMapping TypeName="dbModel.unidad_med">
+              <MappingFragment StoreEntitySet="unidad_med">
+                <ScalarProperty Name="unidad_id" ColumnName="unidad_id" />
+                <ScalarProperty Name="descripcion_id" ColumnName="descripcion_id" />
+                <ScalarProperty Name="factor_n" ColumnName="factor_n" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuarios">
+            <EntityTypeMapping TypeName="dbModel.usuario">
+              <MappingFragment StoreEntitySet="usuarios">
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="sector" ColumnName="sector" />
+                <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+                <ScalarProperty Name="interno" ColumnName="interno" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="lenguaje_id" ColumnName="lenguaje_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
