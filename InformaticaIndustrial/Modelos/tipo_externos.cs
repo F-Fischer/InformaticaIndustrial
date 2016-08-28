@@ -7,25 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InformaticaIndustrial
+namespace InformaticaIndustrial.Modelos
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class unidad_med
+    public partial class tipo_externos
     {
-        public unidad_med()
+        public tipo_externos()
         {
-            this.articuloes = new HashSet<articulo>();
-            this.boms = new HashSet<bom>();
+            this.externos = new HashSet<externo>();
         }
     
-        public int unidad_id { get; set; }
+        public int tipo_ext_id { get; set; }
         public int descripcion_id { get; set; }
-        public string factor_n { get; set; }
     
-        public virtual ICollection<articulo> articuloes { get; set; }
-        public virtual ICollection<bom> boms { get; set; }
         public virtual descripcion descripcion { get; set; }
+        public virtual ICollection<externo> externos { get; set; }
     }
 }

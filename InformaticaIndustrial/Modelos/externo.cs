@@ -7,22 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InformaticaIndustrial
+namespace InformaticaIndustrial.Modelos
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class rol
+    public partial class externo
     {
-        public rol()
-        {
-            this.usuarios = new HashSet<usuario>();
-        }
-    
-        public int rol_id { get; set; }
+        public int ext_id { get; set; }
+        public int tipo_ext_id { get; set; }
         public int descripcion_id { get; set; }
+        public string CUIT { get; set; }
+        public int direccion_id { get; set; }
+        public int direccion_ent_id { get; set; }
+        public int direccion_fac_id { get; set; }
+        public string nac_ext { get; set; }
     
         public virtual descripcion descripcion { get; set; }
-        public virtual ICollection<usuario> usuarios { get; set; }
+        public virtual tipo_externos tipo_externos { get; set; }
     }
 }

@@ -7,22 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InformaticaIndustrial
+namespace InformaticaIndustrial.Modelos
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class tipo_externos
+    public partial class lenguaje
     {
-        public tipo_externos()
+        public lenguaje()
         {
-            this.externos = new HashSet<externo>();
+            this.descripcions = new HashSet<descripcion>();
+            this.usuarios = new HashSet<usuario>();
         }
     
-        public int tipo_ext_id { get; set; }
-        public int descripcion_id { get; set; }
+        public int lenguaje_id { get; set; }
+        public string lenguaje_desc { get; set; }
     
-        public virtual descripcion descripcion { get; set; }
-        public virtual ICollection<externo> externos { get; set; }
+        public virtual ICollection<descripcion> descripcions { get; set; }
+        public virtual ICollection<usuario> usuarios { get; set; }
     }
 }
