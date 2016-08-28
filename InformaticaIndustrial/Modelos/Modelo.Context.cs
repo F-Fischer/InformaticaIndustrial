@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InformaticaIndustrial
+namespace InformaticaIndustrial.Modelos
 {
     using System;
     using System.Data.Entity;

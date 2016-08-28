@@ -7,23 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InformaticaIndustrial
+namespace InformaticaIndustrial.Modelos
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class lenguaje
+    public partial class tipo_articulo
     {
-        public lenguaje()
+        public tipo_articulo()
         {
-            this.descripcions = new HashSet<descripcion>();
-            this.usuarios = new HashSet<usuario>();
+            this.articuloes = new HashSet<articulo>();
         }
     
-        public int lenguaje_id { get; set; }
-        public string lenguaje_desc { get; set; }
+        public int tipo_id { get; set; }
+        public int descripcion_id { get; set; }
     
-        public virtual ICollection<descripcion> descripcions { get; set; }
-        public virtual ICollection<usuario> usuarios { get; set; }
+        public virtual ICollection<articulo> articuloes { get; set; }
+        public virtual descripcion descripcion { get; set; }
     }
 }
