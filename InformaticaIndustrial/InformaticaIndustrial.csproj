@@ -71,6 +71,18 @@
     </Compile>
     <Compile Include="Modelos\RegistroDAO.cs" />
     <Compile Include="Modelos\UnidadMedidaDAO.cs" />
+    <Compile Include="Vista\AgregarBom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\AgregarBom.Designer.cs">
+      <DependentUpon>AgregarBom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\BomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\BomForm.Designer.cs">
+      <DependentUpon>BomForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +137,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Vista\AgregarBom.resx">
+      <DependentUpon>AgregarBom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\BomForm.resx">
+      <DependentUpon>BomForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vista\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

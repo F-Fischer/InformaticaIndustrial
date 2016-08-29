@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,9 @@ namespace InformaticaIndustrial.Modelos
         {
             using (dbEntities context = new dbEntities())
             {
-                var query = from b in context.boms select b;
+                var query = from b in context.boms
+                            where b.fecha_fin == null
+                            select b;
                 return query.ToList();
             }
         }
@@ -26,20 +29,26 @@ namespace InformaticaIndustrial.Modelos
             }
         }
 
-        public void addBom(int articuloPadre, int articuloHijo, float cantidad, DateTime? fechaFin, int unidadMedida)
+        public void addBom(bom bom)
         {
             using (dbEntities context = new dbEntities())
             {
                 RegistroDAO rDAO = new RegistroDAO();
-                bom bom = new bom();
-
-                bom.articulo_padre = articuloPadre;
-                bom.articulo_hijo = articuloHijo;
-                bom.cantidad = cantidad;
-                if (fechaFin != null) { bom.fecha_fin = fechaFin; }
-                bom.um_id = unidadMedida;
                 bom.registro_id = rDAO.addRegistro();
                 context.boms.Add(bom);
+                context.SaveChanges();
+            }
+        }
+
+        public void deleteBom(int id)
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                RegistroDAO rDAO = new RegistroDAO();
+                bom bom = context.boms.First(b => b.bom_id == id);
+                bom.fecha_fin = System.DateTime.Now;
+                bom.registro_id = rDAO.addRegistro();
+                ((IObjectContextAdapter)context).ObjectContext.ApplyCurrentValues("boms", bom);
                 context.SaveChanges();
             }
         }
