@@ -16,8 +16,6 @@ namespace InformaticaIndustrial.Vista
         public BomForm()
         {
             InitializeComponent();
-
-            
             BomsGrid.AutoGenerateColumns = false;
             this.loadBomGrid();
 
