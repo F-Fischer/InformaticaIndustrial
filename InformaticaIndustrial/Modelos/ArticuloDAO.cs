@@ -65,6 +65,43 @@ namespace InformaticaIndustrial.Modelos
             }
 
         }
+
+        public System.Collections.IList mostrarPadres(int id)
+        {
+            BomDAO bDAO = new BomDAO();
+
+            System.Collections.IList IdPadres = bDAO.getRelacionesPadre(id);
+            System.Collections.IList articulosPadre = new List<articulo>();
+
+            using (dbEntities context = new dbEntities())
+            {
+
+                foreach (int p in IdPadres)
+                {
+                    var art = from a in context.articuloes where a.articulo_id == p select a;
+                    articulosPadre.Add(art);
+                }
+                return articulosPadre;
+            }   
+        }
+
+        public System.Collections.IList mostrarHijos(int id)
+        {
+            BomDAO bDAO = new BomDAO();
+
+            System.Collections.IList idHijos = bDAO.getRelacionesHijo(id);
+            System.Collections.IList articulosHijo = new List<articulo>();
+
+            using (dbEntities context = new dbEntities())
+            {
+                foreach (int p in idHijos)
+                {
+                    var art = from a in context.articuloes where a.articulo_id == p select a;
+                    articulosHijo.Add(art);
+                }
+                return articulosHijo;
+            }
+        } 
     }
 
 }

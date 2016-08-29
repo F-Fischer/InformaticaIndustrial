@@ -60,5 +60,23 @@ namespace InformaticaIndustrial.Modelos
             }
         }
 
+        public System.Collections.IList getRelacionesPadre(int id)
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                var query = from b in context.boms where b.articulo_hijo == id select b.articulo_padre;
+                return query.ToArray<int>();
+            }
+        }
+
+        public System.Collections.IList getRelacionesHijo(int id)
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                var query = from b in context.boms where b.articulo_padre == id select b.articulo_hijo;
+                return query.ToArray<int>();
+            }
+        }
+
     }
 }
