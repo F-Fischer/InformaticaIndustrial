@@ -18,10 +18,13 @@ namespace InformaticaIndustrial.Modelos
         {
             this.articuloes = new HashSet<articulo>();
             this.boms = new HashSet<bom>();
+
+            this.terminal = "local";
+            this.usuario_id = 1;
         }
     
         public int registro_id { get; set; }
-        public int fecha_mod { get; set; }
+        public System.DateTime fecha_mod { get; set; }
         public string terminal { get; set; }
         public int usuario_id { get; set; }
     
