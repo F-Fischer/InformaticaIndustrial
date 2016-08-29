@@ -54,18 +54,20 @@
             // 
             // cbArticuloPadre
             // 
+            this.cbArticuloPadre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbArticuloPadre.FormattingEnabled = true;
             this.cbArticuloPadre.Location = new System.Drawing.Point(167, 12);
             this.cbArticuloPadre.Name = "cbArticuloPadre";
-            this.cbArticuloPadre.Size = new System.Drawing.Size(121, 24);
+            this.cbArticuloPadre.Size = new System.Drawing.Size(338, 24);
             this.cbArticuloPadre.TabIndex = 1;
             // 
             // cbArticuloHijo
             // 
+            this.cbArticuloHijo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbArticuloHijo.FormattingEnabled = true;
             this.cbArticuloHijo.Location = new System.Drawing.Point(167, 53);
             this.cbArticuloHijo.Name = "cbArticuloHijo";
-            this.cbArticuloHijo.Size = new System.Drawing.Size(121, 24);
+            this.cbArticuloHijo.Size = new System.Drawing.Size(338, 24);
             this.cbArticuloHijo.TabIndex = 3;
             // 
             // label2
@@ -80,7 +82,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 211);
+            this.label3.Location = new System.Drawing.Point(38, 204);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(123, 17);
             this.label3.TabIndex = 2;
@@ -88,10 +90,11 @@
             // 
             // cbUnidadMedida
             // 
+            this.cbUnidadMedida.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbUnidadMedida.FormattingEnabled = true;
-            this.cbUnidadMedida.Location = new System.Drawing.Point(167, 208);
+            this.cbUnidadMedida.Location = new System.Drawing.Point(167, 204);
             this.cbUnidadMedida.Name = "cbUnidadMedida";
-            this.cbUnidadMedida.Size = new System.Drawing.Size(121, 24);
+            this.cbUnidadMedida.Size = new System.Drawing.Size(200, 24);
             this.cbUnidadMedida.TabIndex = 3;
             // 
             // label4
@@ -107,7 +110,7 @@
             // 
             this.txtCantidad.Location = new System.Drawing.Point(167, 92);
             this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(100, 22);
+            this.txtCantidad.Size = new System.Drawing.Size(200, 22);
             this.txtCantidad.TabIndex = 5;
             // 
             // dpFechaFin
@@ -129,9 +132,9 @@
             // 
             // dpFechaInicio
             // 
-            this.dpFechaInicio.Location = new System.Drawing.Point(164, 127);
+            this.dpFechaInicio.Location = new System.Drawing.Point(167, 127);
             this.dpFechaInicio.Name = "dpFechaInicio";
-            this.dpFechaInicio.Size = new System.Drawing.Size(200, 22);
+            this.dpFechaInicio.Size = new System.Drawing.Size(203, 22);
             this.dpFechaInicio.TabIndex = 6;
             this.dpFechaInicio.Value = new System.DateTime(2016, 8, 28, 23, 22, 27, 0);
             // 
@@ -146,7 +149,7 @@
             // 
             // btnAgregarBom
             // 
-            this.btnAgregarBom.Location = new System.Drawing.Point(324, 267);
+            this.btnAgregarBom.Location = new System.Drawing.Point(405, 267);
             this.btnAgregarBom.Name = "btnAgregarBom";
             this.btnAgregarBom.Size = new System.Drawing.Size(100, 51);
             this.btnAgregarBom.TabIndex = 8;
@@ -158,7 +161,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 330);
+            this.ClientSize = new System.Drawing.Size(517, 330);
             this.Controls.Add(this.btnAgregarBom);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dpFechaInicio);

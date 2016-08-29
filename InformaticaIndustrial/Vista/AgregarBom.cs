@@ -13,20 +13,23 @@ namespace InformaticaIndustrial.Vista
 {
     public partial class AgregarBom : Form
     {
-        public AgregarBom()
+        private BomForm bform;
+
+        public AgregarBom(BomForm bform)
         {
             InitializeComponent();
 
+            this.bform = bform;
             ArticuloDAO aDAO = new ArticuloDAO();
             UnidadMedidaDAO umDAO = new UnidadMedidaDAO();
             DescripcionDAO dDAO = new DescripcionDAO();
 
-            cbArticuloPadre.DataSource = aDAO.getArticulos();
-            cbArticuloPadre.DisplayMember = "descripcion";
+            cbArticuloPadre.DataSource = aDAO.getArticuloDescripcion();
+            cbArticuloPadre.DisplayMember = "descripcion_str";
             cbArticuloPadre.ValueMember = "articulo_id";
 
-            cbArticuloHijo.DataSource = aDAO.getArticulos();
-            cbArticuloHijo.DisplayMember = "descripcion";
+            cbArticuloHijo.DataSource = aDAO.getArticuloDescripcion();
+            cbArticuloHijo.DisplayMember = "descripcion_str";
             cbArticuloHijo.ValueMember = "articulo_id";
 
             cbUnidadMedida.DataSource = umDAO.getDescripcionUM();
@@ -53,6 +56,7 @@ namespace InformaticaIndustrial.Vista
                 bom.fecha_fin = dpFechaFin.Value;
             bom.um_id = (int)cbUnidadMedida.SelectedValue;
             bDAO.addBom(bom);
+            bform.loadBomGrid();
             this.Close();
         }
 

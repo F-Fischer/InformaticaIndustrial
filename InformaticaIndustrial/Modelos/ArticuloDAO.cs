@@ -18,6 +18,19 @@ namespace InformaticaIndustrial.Modelos
             }
         }
 
+        public System.Collections.IList getArticuloDescripcion()
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                var query = from a in context.articuloes
+                            from d in context.descripcions
+                            where a.descripcion_id == d.descripcion_id
+                            select new { a.articulo_id, d.descripcion_str };
+                return query.ToList();
+            }
+
+        }
+
         public System.Collections.IList getArticuloById(int id)
         {
             using (dbEntities context = new dbEntities())
