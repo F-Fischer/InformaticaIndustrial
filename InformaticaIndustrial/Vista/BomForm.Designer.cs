@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             this.BomsGrid = new System.Windows.Forms.DataGridView();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.agregarBom = new System.Windows.Forms.Button();
-            this.btnEliminarBom = new System.Windows.Forms.Button();
             this.bom_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.articulo_padre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.articulo_hijo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.um_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.agregarBom = new System.Windows.Forms.Button();
+            this.btnEliminarBom = new System.Windows.Forms.Button();
+            this.btnVerArticulos = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.BomsGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,31 +52,12 @@
             this.cantidad,
             this.fecha_inicio,
             this.um_id});
-            this.BomsGrid.Location = new System.Drawing.Point(12, 12);
+            this.BomsGrid.Location = new System.Drawing.Point(9, 10);
+            this.BomsGrid.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BomsGrid.Name = "BomsGrid";
             this.BomsGrid.RowTemplate.Height = 24;
-            this.BomsGrid.Size = new System.Drawing.Size(1032, 303);
+            this.BomsGrid.Size = new System.Drawing.Size(774, 246);
             this.BomsGrid.TabIndex = 0;
-            // 
-            // agregarBom
-            // 
-            this.agregarBom.Location = new System.Drawing.Point(12, 321);
-            this.agregarBom.Name = "agregarBom";
-            this.agregarBom.Size = new System.Drawing.Size(121, 42);
-            this.agregarBom.TabIndex = 1;
-            this.agregarBom.Text = "Agregar";
-            this.agregarBom.UseVisualStyleBackColor = true;
-            this.agregarBom.Click += new System.EventHandler(this.agregarBom_Click);
-            // 
-            // btnEliminarBom
-            // 
-            this.btnEliminarBom.Location = new System.Drawing.Point(139, 321);
-            this.btnEliminarBom.Name = "btnEliminarBom";
-            this.btnEliminarBom.Size = new System.Drawing.Size(115, 42);
-            this.btnEliminarBom.TabIndex = 2;
-            this.btnEliminarBom.Text = "Eliminar";
-            this.btnEliminarBom.UseVisualStyleBackColor = true;
-            this.btnEliminarBom.Click += new System.EventHandler(this.btnEliminarBom_Click);
             // 
             // bom_id
             // 
@@ -113,14 +95,48 @@
             this.um_id.HeaderText = "Unidad de Medida";
             this.um_id.Name = "um_id";
             // 
+            // agregarBom
+            // 
+            this.agregarBom.Location = new System.Drawing.Point(9, 261);
+            this.agregarBom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.agregarBom.Name = "agregarBom";
+            this.agregarBom.Size = new System.Drawing.Size(91, 34);
+            this.agregarBom.TabIndex = 1;
+            this.agregarBom.Text = "Agregar";
+            this.agregarBom.UseVisualStyleBackColor = true;
+            this.agregarBom.Click += new System.EventHandler(this.agregarBom_Click);
+            // 
+            // btnEliminarBom
+            // 
+            this.btnEliminarBom.Location = new System.Drawing.Point(104, 261);
+            this.btnEliminarBom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEliminarBom.Name = "btnEliminarBom";
+            this.btnEliminarBom.Size = new System.Drawing.Size(86, 34);
+            this.btnEliminarBom.TabIndex = 2;
+            this.btnEliminarBom.Text = "Eliminar";
+            this.btnEliminarBom.UseVisualStyleBackColor = true;
+            this.btnEliminarBom.Click += new System.EventHandler(this.btnEliminarBom_Click);
+            // 
+            // btnVerArticulos
+            // 
+            this.btnVerArticulos.Location = new System.Drawing.Point(676, 261);
+            this.btnVerArticulos.Name = "btnVerArticulos";
+            this.btnVerArticulos.Size = new System.Drawing.Size(107, 33);
+            this.btnVerArticulos.TabIndex = 3;
+            this.btnVerArticulos.Text = "Ver Articulos";
+            this.btnVerArticulos.UseVisualStyleBackColor = true;
+            this.btnVerArticulos.Click += new System.EventHandler(this.btnVerArticulos_Click);
+            // 
             // BomForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1056, 437);
+            this.ClientSize = new System.Drawing.Size(792, 355);
+            this.Controls.Add(this.btnVerArticulos);
             this.Controls.Add(this.btnEliminarBom);
             this.Controls.Add(this.agregarBom);
             this.Controls.Add(this.BomsGrid);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "BomForm";
             this.Text = "BomForm";
             ((System.ComponentModel.ISupportInitialize)(this.BomsGrid)).EndInit();
@@ -140,5 +156,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha_inicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn um_id;
+        private System.Windows.Forms.Button btnVerArticulos;
     }
 }

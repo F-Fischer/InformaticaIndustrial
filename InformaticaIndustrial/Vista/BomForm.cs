@@ -45,5 +45,11 @@ namespace InformaticaIndustrial.Vista
             BomsGrid.DataSource = null;
             BomsGrid.DataSource = bDAO.getBoms();
         }
+
+        private void btnVerArticulos_Click(object sender, EventArgs e)
+        {
+            ExplosionImplosionForm eiForm = new ExplosionImplosionForm();
+            eiForm.Show();
+        }
     }
 }
