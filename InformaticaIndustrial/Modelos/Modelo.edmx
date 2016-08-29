@@ -11,7 +11,7 @@
           </Key>
           <Property Name="articulo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion_id" Type="int" Nullable="false" />
-          <Property Name="precio_std" Type="float" Nullable="false" />
+          <Property Name="precio_std" Type="float" />
           <Property Name="descripcion" Type="varchar" MaxLength="50" />
           <Property Name="tipo_articulo" Type="int" Nullable="false" />
           <Property Name="unidad_med" Type="int" Nullable="false" />

@@ -17,13 +17,15 @@ namespace InformaticaIndustrial.Vista
         {
             InitializeComponent();
 
-            BomDAO bDAO = new BomDAO();
-            BomsGrid.DataSource = bDAO.getBoms();
+            
+            BomsGrid.AutoGenerateColumns = false;
+            this.loadBomGrid();
+
         }
 
         private void agregarBom_Click(object sender, EventArgs e)
         {
-            AgregarBom agregarBom = new AgregarBom();
+            AgregarBom agregarBom = new AgregarBom(this);
             agregarBom.Show();
         }
 
@@ -34,6 +36,14 @@ namespace InformaticaIndustrial.Vista
 
             BomDAO bDAO = new BomDAO();
             bDAO.deleteBom(id);
+            loadBomGrid();
+        }
+
+        public void loadBomGrid()
+        {
+            BomDAO bDAO = new BomDAO();
+            BomsGrid.DataSource = null;
+            BomsGrid.DataSource = bDAO.getBoms();
         }
     }
 }
