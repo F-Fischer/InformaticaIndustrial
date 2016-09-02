@@ -40,17 +40,19 @@ namespace InformaticaIndustrial.Modelos
             }
         }
 
-        public void addArticulo(int descripcionId, float precioStd, string descripcion, int tipoArticulo, int um, int registro)
+        public void addArticulo( float precioStd, string descripcion, int tipoArticulo, int um)
         {
             using (dbEntities context = new dbEntities())
             {
                 articulo art = new articulo();
-                art.descripcion_id = descripcionId;
+                DescripcionDAO dDAO = new DescripcionDAO();
+                RegistroDAO rDAO = new RegistroDAO();
+                art.descripcion_id = dDAO.addDescripcion(descripcion);
                 art.precio_std = precioStd;
                 art.descripcion = descripcion;
                 art.tipo_articulo = tipoArticulo;
                 art.unidad_med = um;
-                art.registro_id = registro;
+                art.registro_id = rDAO.addRegistro();
                 context.articuloes.Add(art);
                 context.SaveChanges();
             }
@@ -110,7 +112,7 @@ namespace InformaticaIndustrial.Modelos
                 foreach (int p in idHijos)
                 {
                     var art = from a in context.articuloes where a.articulo_id == p select a;
-                    articulosHijo.Add(art);
+                    articulosHijo.Add((articulo)art);
                 }
                 return articulosHijo;
             }
