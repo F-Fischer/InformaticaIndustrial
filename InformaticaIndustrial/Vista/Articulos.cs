@@ -84,5 +84,19 @@ namespace InformaticaIndustrial.Vista
             lista.Add(index);
             aDAO.Explosion(lista);
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            int index = (int)this.lbArticulos.SelectedValue;
+            aDAO.deleteArticulo(index);
+            loadListBox();
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            lbArticulos.DataSource = aDAO.buscarArticulos(txtBuscar.Text);
+            lbArticulos.ValueMember = "articulo_id";
+            lbArticulos.DisplayMember = "descripcion_str";
+        }
     }
 }
