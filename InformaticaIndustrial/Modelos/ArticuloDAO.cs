@@ -130,7 +130,38 @@ namespace InformaticaIndustrial.Modelos
                 }
                 return articulosHijo;
             }
-        } 
+        }
+
+        
+
+        public List<int> getHijos(List<int> idPadres)
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                var idHijos = context.boms
+                    .Where(hijo => idPadres.Contains(hijo.articulo_padre))
+                    .Select(hijo => hijo.articulo_hijo)
+                    .ToList();
+                if (idHijos.Count == 0)
+                    return idPadres;
+                else
+                    return idPadres.Concat(getHijos(idHijos)).ToList();
+            }
+        }
+
+        public System.Collections.IList Explosion(List<int> id)
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                var idHijos = getHijos(id);
+                var arts = context.articuloes
+                    .Where(a => idHijos.Contains(a.articulo_id))
+                    .Select(a => a);
+
+                return arts.ToList();
+
+            }
+        }
     }
 
 }

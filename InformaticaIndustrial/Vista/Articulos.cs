@@ -76,6 +76,13 @@ namespace InformaticaIndustrial.Vista
 
         }
 
-       
+        private void btnExplosion_Click(object sender, EventArgs e)
+        {
+            ArticuloDAO aDAO = new ArticuloDAO();
+            int index = (int)this.lbArticulos.SelectedValue;
+            List<int> lista = new List<int>();
+            lista.Add(index);
+            aDAO.Explosion(lista);
+        }
     }
 }
