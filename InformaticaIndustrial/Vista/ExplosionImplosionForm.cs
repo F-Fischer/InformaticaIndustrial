@@ -20,6 +20,7 @@ namespace InformaticaIndustrial.Vista
             //ArticuloGrid.AutoGenerateColumns = false;
             ArticuloGrid.DataSource = null;
             ArticuloGrid.DataSource = aDAO.getArticulos();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -39,5 +40,7 @@ namespace InformaticaIndustrial.Vista
             dataGridView2.DataSource = null;
             dataGridView2.DataSource = aDAO.mostrarHijos(id);
         }
+
+        
     }
 }
