@@ -17,8 +17,7 @@ namespace InformaticaIndustrial
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new BomForm());
-            Application.Run(new AltaArticulo());
+            Application.Run(new MenuPrincipal());
         }
     }
 }

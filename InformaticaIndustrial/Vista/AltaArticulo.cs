@@ -16,13 +16,15 @@ namespace InformaticaIndustrial.Vista
         private ArticuloDAO aDAO;
         private UnidadMedidaDAO umDAO;
         private TipoArticuloDAO taDAO;
+        private Articulos art;
 
-        public AltaArticulo()
+        public AltaArticulo(Articulos art)
         {
             InitializeComponent();
             this.aDAO = new ArticuloDAO();
             this.umDAO = new UnidadMedidaDAO();
             this.taDAO = new TipoArticuloDAO();
+            this.art = art;
 
             cbUnidadMedida.DataSource = umDAO.getDescripcionUM();
             cbUnidadMedida.ValueMember = "unidad_id";
@@ -36,6 +38,12 @@ namespace InformaticaIndustrial.Vista
         private void btnAgregarArticulo_Click(object sender, EventArgs e)
         {
             aDAO.addArticulo((float)Convert.ToDouble(txtPrecio.Text), txtDescripcion.Text, (int)cbTipoArticulo.SelectedValue, (int)cbUnidadMedida.SelectedValue);
+            art.loadListBox();
+            this.Close();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

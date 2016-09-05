@@ -53,6 +53,25 @@ namespace InformaticaIndustrial.Modelos
             }
         }
 
+        public void updateBom(int bomId, int hijoId, float cantidad, int um)
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                var result = context.boms.SingleOrDefault(b => b.bom_id == bomId);
+
+                if (result != null)
+                {
+                    result.articulo_hijo = hijoId;
+                    result.cantidad = cantidad;
+                    result.um_id = um;
+
+                    context.boms.Attach(result);
+                    context.Entry(result).State = System.Data.EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+        }
+
         public void addArticulo(int descripcionId, float precioStd, string descripcion, int tipoArticulo, int um, int registro)
         {
             using (dbEntities context = new dbEntities())

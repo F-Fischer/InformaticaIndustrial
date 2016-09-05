@@ -33,5 +33,19 @@ namespace InformaticaIndustrial.Modelos
                 return query.ToList();                            
             }
         }
+
+        public System.Collections.IList getTipoArticulosById(int id)
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                DescripcionDAO dDAO = new DescripcionDAO();
+                var query = from ta in context.tipo_articulo
+                            from d in context.descripcions
+                            where ta.descripcion_id == d.descripcion_id
+                            where ta.tipo_id == id
+                            select new { ta.tipo_id, d.descripcion_str };
+                return query.ToList();
+            }
+        }
     }
 }

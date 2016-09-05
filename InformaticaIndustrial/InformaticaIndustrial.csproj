@@ -84,6 +84,12 @@
     <Compile Include="Vista\AltaArticulo.Designer.cs">
       <DependentUpon>AltaArticulo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Articulos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\Articulos.Designer.cs">
+      <DependentUpon>Articulos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vista\BomForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,24 @@
     <Compile Include="Modelos\usuario.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Vista\FormInicial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\FormInicial.Designer.cs">
+      <DependentUpon>FormInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\MenuPrincipal.Designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\ModificarBomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\ModificarBomForm.Designer.cs">
+      <DependentUpon>ModificarBomForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Programa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +186,9 @@
     <EmbeddedResource Include="Vista\AltaArticulo.resx">
       <DependentUpon>AltaArticulo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vista\Articulos.resx">
+      <DependentUpon>Articulos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vista\BomForm.resx">
       <DependentUpon>BomForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -170,6 +197,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\ModificarBomForm.resx">
+      <DependentUpon>ModificarBomForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\Programa.resx">
       <DependentUpon>Programa.cs</DependentUpon>
