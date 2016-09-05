@@ -33,12 +33,6 @@
             this.btnImplosion = new System.Windows.Forms.Button();
             this.btnExplosion = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.articulo_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.precio_std = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipo_articulo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unidad_med = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ArticuloGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -46,13 +40,6 @@
             // ArticuloGrid
             // 
             this.ArticuloGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ArticuloGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.articulo_id,
-            this.descripcion_id,
-            this.precio_std,
-            this.tipo_articulo,
-            this.unidad_med,
-            this.fecha_inicio});
             this.ArticuloGrid.Location = new System.Drawing.Point(12, 39);
             this.ArticuloGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ArticuloGrid.Name = "ArticuloGrid";
@@ -101,36 +88,6 @@
             this.dataGridView2.Size = new System.Drawing.Size(1137, 174);
             this.dataGridView2.TabIndex = 3;
             // 
-            // articulo_id
-            // 
-            this.articulo_id.HeaderText = "Articulo ID";
-            this.articulo_id.Name = "articulo_id";
-            // 
-            // descripcion_id
-            // 
-            this.descripcion_id.HeaderText = "Descripción";
-            this.descripcion_id.Name = "descripcion_id";
-            // 
-            // precio_std
-            // 
-            this.precio_std.HeaderText = "Precio Std";
-            this.precio_std.Name = "precio_std";
-            // 
-            // tipo_articulo
-            // 
-            this.tipo_articulo.HeaderText = "Tipo articulo";
-            this.tipo_articulo.Name = "tipo_articulo";
-            // 
-            // unidad_med
-            // 
-            this.unidad_med.HeaderText = "Unidad de Medida";
-            this.unidad_med.Name = "unidad_med";
-            // 
-            // fecha_inicio
-            // 
-            this.fecha_inicio.HeaderText = "Fecha Inicio";
-            this.fecha_inicio.Name = "fecha_inicio";
-            // 
             // ExplosionImplosionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -158,11 +115,5 @@
         private System.Windows.Forms.Button btnImplosion;
         private System.Windows.Forms.Button btnExplosion;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn articulo_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn precio_std;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tipo_articulo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unidad_med;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fecha_inicio;
     }
 }

@@ -25,5 +25,20 @@ namespace InformaticaIndustrial.Modelos
                 return query.ToList();
             }
         }
+
+        public int addDescripcion(string descripcion) {
+
+            using (dbEntities context = new dbEntities())
+            {
+                descripcion d = new descripcion();
+
+                d.lenguaje_id = 1;
+                d.descripcion_str = descripcion;
+
+                context.descripcions.Add(d);
+                context.SaveChanges();
+                return d.descripcion_id;
+            }
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace InformaticaIndustrial.Vista
         {
             InitializeComponent();
             ArticuloDAO aDAO = new ArticuloDAO();
-            ArticuloGrid.AutoGenerateColumns = false;
+            //ArticuloGrid.AutoGenerateColumns = false;
             ArticuloGrid.DataSource = null;
             ArticuloGrid.DataSource = aDAO.getArticulos();
 

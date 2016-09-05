@@ -70,12 +70,25 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\RegistroDAO.cs" />
+    <Compile Include="Modelos\TipoArticuloDAO.cs" />
     <Compile Include="Modelos\UnidadMedidaDAO.cs" />
     <Compile Include="Vista\AgregarBom.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vista\AgregarBom.Designer.cs">
       <DependentUpon>AgregarBom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\AltaArticulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\AltaArticulo.Designer.cs">
+      <DependentUpon>AltaArticulo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Articulos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\Articulos.Designer.cs">
+      <DependentUpon>Articulos.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\BomForm.cs">
       <SubType>Form</SubType>
@@ -134,6 +147,30 @@
     <Compile Include="Modelos\usuario.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Vista\FormInicial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\FormInicial.Designer.cs">
+      <DependentUpon>FormInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\MenuPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\MenuPrincipal.Designer.cs">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\ModificarBomForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\ModificarBomForm.Designer.cs">
+      <DependentUpon>ModificarBomForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\Programa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\Programa.Designer.cs">
+      <DependentUpon>Programa.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -146,6 +183,12 @@
     <EmbeddedResource Include="Vista\AgregarBom.resx">
       <DependentUpon>AgregarBom.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vista\AltaArticulo.resx">
+      <DependentUpon>AltaArticulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\Articulos.resx">
+      <DependentUpon>Articulos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vista\BomForm.resx">
       <DependentUpon>BomForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -154,6 +197,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\MenuPrincipal.resx">
+      <DependentUpon>MenuPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\ModificarBomForm.resx">
+      <DependentUpon>ModificarBomForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\Programa.resx">
+      <DependentUpon>Programa.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Modelos\Modelo.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

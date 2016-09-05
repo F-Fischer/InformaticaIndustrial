@@ -49,5 +49,12 @@ namespace InformaticaIndustrial.Vista
             ExplosionImplosionForm eiForm = new ExplosionImplosionForm();
             eiForm.Show();
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            int rowindex = BomsGrid.CurrentCell.RowIndex;
+            ModificarBomForm mbf = new ModificarBomForm((int)BomsGrid.Rows[rowindex].Cells["bom_id"].Value,this);
+            mbf.Show();
+        }
     }
 }
