@@ -95,6 +95,19 @@ namespace InformaticaIndustrial.Modelos
 
         }
 
+        public System.Collections.IList buscarArticulos(string nombre)
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                var query = from a in context.articuloes
+                            from d in context.descripcions
+                            where a.descripcion_id == d.descripcion_id
+                            where d.descripcion_str.Contains(nombre)
+                            select new  { d.descripcion_str, a.articulo_id };
+                return query.ToList();
+            }
+        }
+
         public System.Collections.IList mostrarPadres(int id)
         {
             BomDAO bDAO = new BomDAO();
