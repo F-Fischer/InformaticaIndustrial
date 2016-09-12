@@ -64,6 +64,8 @@ namespace InformaticaIndustrial.Vista
         {
             AltaArticulo aa = new AltaArticulo(this);
             aa.Show();
+
+
         }
 
         private void Articulos_Leave(object sender, EventArgs e)
@@ -73,16 +75,8 @@ namespace InformaticaIndustrial.Vista
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            
 
-        }
-
-        private void btnExplosion_Click(object sender, EventArgs e)
-        {
-            ArticuloDAO aDAO = new ArticuloDAO();
-            int index = (int)this.lbArticulos.SelectedValue;
-            List<int> lista = new List<int>();
-            lista.Add(index);
-            aDAO.Explosion(lista);
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -97,6 +91,14 @@ namespace InformaticaIndustrial.Vista
             lbArticulos.DataSource = aDAO.buscarArticulos(txtBuscar.Text);
             lbArticulos.ValueMember = "articulo_id";
             lbArticulos.DisplayMember = "descripcion_str";
+        }
+        private void btnExplosion_Click(object sender, EventArgs e)
+        {
+            ArticuloDAO aDAO = new ArticuloDAO();
+            int index = (int)this.lbArticulos.SelectedValue;
+            List<int> lista = new List<int>();
+            lista.Add(index);
+            aDAO.Explosion(lista);
         }
     }
 }
