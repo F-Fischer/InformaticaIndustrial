@@ -18,6 +18,7 @@ namespace InformaticaIndustrial.Modelos
         {
             this.art_sustituto = new HashSet<art_sustituto>();
             this.art_sustituto1 = new HashSet<art_sustituto>();
+            this.stocks = new HashSet<stock>();
             this.boms = new HashSet<bom>();
             this.boms1 = new HashSet<bom>();
         }
@@ -25,7 +26,7 @@ namespace InformaticaIndustrial.Modelos
         public int articulo_id { get; set; }
         public int descripcion_id { get; set; }
         public float precio_std { get; set; }
-        public string descripcion { get; set; }
+        public Nullable<int> codigo { get; set; }
         public int tipo_articulo { get; set; }
         public int unidad_med { get; set; }
         public System.DateTime fecha_inicio { get; set; }
@@ -34,8 +35,9 @@ namespace InformaticaIndustrial.Modelos
     
         public virtual ICollection<art_sustituto> art_sustituto { get; set; }
         public virtual ICollection<art_sustituto> art_sustituto1 { get; set; }
-        public virtual descripcion descripcion1 { get; set; }
+        public virtual descripcion descripcion { get; set; }
         public virtual registro registro { get; set; }
+        public virtual ICollection<stock> stocks { get; set; }
         public virtual tipo_articulo tipo_articulo1 { get; set; }
         public virtual unidad_med unidad_med1 { get; set; }
         public virtual ICollection<bom> boms { get; set; }

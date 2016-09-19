@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="art_sustituto">
           <Key>
             <PropertyRef Name="art_sustituto_id" />
@@ -22,7 +22,7 @@
           <Property Name="articulo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion_id" Type="int" Nullable="false" />
           <Property Name="precio_std" Type="float" Nullable="false" />
-          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="codigo" Type="int" />
           <Property Name="tipo_articulo" Type="int" Nullable="false" />
           <Property Name="unidad_med" Type="int" Nullable="false" />
           <Property Name="fecha_inicio" Type="datetime" Precision="0" Nullable="false" />
@@ -37,7 +37,7 @@
           <Property Name="articulo_padre" Type="int" Nullable="false" />
           <Property Name="articulo_hijo" Type="int" Nullable="false" />
           <Property Name="cantidad" Type="float" Nullable="false" />
-          <Property Name="fecha_inicio" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_inicio" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="fecha_fin" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="semana_inicio" Type="int" Nullable="false" />
           <Property Name="semana_fin" Type="int" Nullable="false" />
@@ -78,7 +78,7 @@
             <PropertyRef Name="registro_id" />
           </Key>
           <Property Name="registro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fecha_mod" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_mod" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="terminal" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="usuario_id" Type="int" Nullable="false" />
         </EntityType>
@@ -88,6 +88,15 @@
           </Key>
           <Property Name="rol_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stock">
+          <Key>
+            <PropertyRef Name="stock_id" />
+          </Key>
+          <Property Name="stock_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="articulo_id" Type="int" Nullable="false" />
+          <Property Name="codigo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tipo_articulo">
           <Key>
@@ -145,6 +154,18 @@
             </Principal>
             <Dependent Role="articulo">
               <PropertyRef Name="registro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="articulo_stock">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1" />
+          <End Role="stock" Type="Self.stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="articulo_id" />
+            </Principal>
+            <Dependent Role="stock">
+              <PropertyRef Name="articulo_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -385,6 +406,7 @@
           <EntitySet Name="lenguaje" EntityType="Self.lenguaje" Schema="db_ii" store:Type="Tables" />
           <EntitySet Name="registros" EntityType="Self.registros" Schema="db_ii" store:Type="Tables" />
           <EntitySet Name="rol" EntityType="Self.rol" Schema="db_ii" store:Type="Tables" />
+          <EntitySet Name="stock" EntityType="Self.stock" Schema="db_ii" store:Type="Tables" />
           <EntitySet Name="tipo_articulo" EntityType="Self.tipo_articulo" Schema="db_ii" store:Type="Tables" />
           <EntitySet Name="tipo_externos" EntityType="Self.tipo_externos" Schema="db_ii" store:Type="Tables" />
           <EntitySet Name="unidad_med" EntityType="Self.unidad_med" Schema="db_ii" store:Type="Tables" />
@@ -396,6 +418,10 @@
           <AssociationSet Name="articulo_id_registro" Association="Self.articulo_id_registro">
             <End Role="registros" EntitySet="registros" />
             <End Role="articulo" EntitySet="articulo" />
+          </AssociationSet>
+          <AssociationSet Name="articulo_stock" Association="Self.articulo_stock">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="stock" EntitySet="stock" />
           </AssociationSet>
           <AssociationSet Name="articulo_tipo_articulo" Association="Self.articulo_tipo_articulo">
             <End Role="tipo_articulo" EntitySet="tipo_articulo" />
@@ -499,7 +525,7 @@
           <Property Name="articulo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion_id" Type="Int32" Nullable="false" />
           <Property Name="precio_std" Type="Single" Nullable="false" />
-          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo" Type="Int32" />
           <Property Name="tipo_articulo" Type="Int32" Nullable="false" />
           <Property Name="unidad_med" Type="Int32" Nullable="false" />
           <Property Name="fecha_inicio" Type="DateTime" Nullable="false" />
@@ -507,8 +533,9 @@
           <Property Name="registro_id" Type="Int32" />
           <NavigationProperty Name="art_sustituto" Relationship="Self.principal_id" FromRole="articulo" ToRole="art_sustituto" />
           <NavigationProperty Name="art_sustituto1" Relationship="Self.sustituto_id" FromRole="articulo" ToRole="art_sustituto" />
-          <NavigationProperty Name="descripcion1" Relationship="Self.articulo_id_descripcion" FromRole="articulo" ToRole="descripcion" />
+          <NavigationProperty Name="descripcion" Relationship="Self.articulo_id_descripcion" FromRole="articulo" ToRole="descripcion" />
           <NavigationProperty Name="registro" Relationship="Self.articulo_id_registro" FromRole="articulo" ToRole="registros" />
+          <NavigationProperty Name="stocks" Relationship="Self.articulo_stock" FromRole="articulo" ToRole="stock" />
           <NavigationProperty Name="tipo_articulo1" Relationship="Self.articulo_tipo_articulo" FromRole="articulo" ToRole="tipo_articulo" />
           <NavigationProperty Name="unidad_med1" Relationship="Self.articulo_um_id" FromRole="articulo" ToRole="unidad_med" />
           <NavigationProperty Name="boms" Relationship="Self.bom_id_hijo" FromRole="articulo" ToRole="bom" />
@@ -522,7 +549,7 @@
           <Property Name="articulo_padre" Type="Int32" Nullable="false" />
           <Property Name="articulo_hijo" Type="Int32" Nullable="false" />
           <Property Name="cantidad" Type="Single" Nullable="false" />
-          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_inicio" Type="DateTime" Nullable="false" />
           <Property Name="fecha_fin" Type="DateTime" Nullable="false" />
           <Property Name="semana_inicio" Type="Int32" Nullable="false" />
           <Property Name="semana_fin" Type="Int32" Nullable="false" />
@@ -578,7 +605,7 @@
             <PropertyRef Name="registro_id" />
           </Key>
           <Property Name="registro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fecha_mod" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_mod" Type="DateTime" Nullable="false" />
           <Property Name="terminal" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="usuario_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="articuloes" Relationship="Self.articulo_id_registro" FromRole="registros" ToRole="articulo" />
@@ -593,6 +620,16 @@
           <Property Name="descripcion_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="descripcion" Relationship="Self.rol_ibfk_1" FromRole="rol" ToRole="descripcion" />
           <NavigationProperty Name="usuarios" Relationship="Self.usuario_rol" FromRole="rol" ToRole="usuarios" />
+        </EntityType>
+        <EntityType Name="stock">
+          <Key>
+            <PropertyRef Name="stock_id" />
+          </Key>
+          <Property Name="stock_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="articulo_id" Type="Int32" Nullable="false" />
+          <Property Name="codigo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="articulo" Relationship="Self.articulo_stock" FromRole="stock" ToRole="articulo" />
         </EntityType>
         <EntityType Name="tipo_articulo">
           <Key>
@@ -697,6 +734,18 @@
             </Principal>
             <Dependent Role="articulo">
               <PropertyRef Name="registro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="articulo_stock">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1" />
+          <End Role="stock" Type="Self.stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="articulo_id" />
+            </Principal>
+            <Dependent Role="stock">
+              <PropertyRef Name="articulo_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -901,6 +950,7 @@
           <EntitySet Name="lenguajes" EntityType="Self.lenguaje" />
           <EntitySet Name="registros" EntityType="Self.registro" />
           <EntitySet Name="rols" EntityType="Self.rol" />
+          <EntitySet Name="stocks" EntityType="Self.stock" />
           <EntitySet Name="tipo_articulo" EntityType="Self.tipo_articulo" />
           <EntitySet Name="tipo_externos" EntityType="Self.tipo_externos" />
           <EntitySet Name="unidad_med" EntityType="Self.unidad_med" />
@@ -924,6 +974,10 @@
           <AssociationSet Name="articulo_id_registro" Association="Self.articulo_id_registro">
             <End Role="registros" EntitySet="registros" />
             <End Role="articulo" EntitySet="articuloes" />
+          </AssociationSet>
+          <AssociationSet Name="articulo_stock" Association="Self.articulo_stock">
+            <End Role="articulo" EntitySet="articuloes" />
+            <End Role="stock" EntitySet="stocks" />
           </AssociationSet>
           <AssociationSet Name="articulo_tipo_articulo" Association="Self.articulo_tipo_articulo">
             <End Role="tipo_articulo" EntitySet="tipo_articulo" />
@@ -1013,7 +1067,7 @@
                 <ScalarProperty Name="articulo_id" ColumnName="articulo_id" />
                 <ScalarProperty Name="descripcion_id" ColumnName="descripcion_id" />
                 <ScalarProperty Name="precio_std" ColumnName="precio_std" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="tipo_articulo" ColumnName="tipo_articulo" />
                 <ScalarProperty Name="unidad_med" ColumnName="unidad_med" />
                 <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
@@ -1085,6 +1139,16 @@
               <MappingFragment StoreEntitySet="rol">
                 <ScalarProperty Name="rol_id" ColumnName="rol_id" />
                 <ScalarProperty Name="descripcion_id" ColumnName="descripcion_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stocks">
+            <EntityTypeMapping TypeName="dbModel.stock">
+              <MappingFragment StoreEntitySet="stock">
+                <ScalarProperty Name="stock_id" ColumnName="stock_id" />
+                <ScalarProperty Name="articulo_id" ColumnName="articulo_id" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

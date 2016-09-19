@@ -33,7 +33,9 @@ namespace InformaticaIndustrial.Vista
 
         private void btnStock_Click(object sender, EventArgs e)
         {
-           
+            Deposito d = new Deposito(this);
+            d.Show();
+            this.Hide();
         }
     }
 }

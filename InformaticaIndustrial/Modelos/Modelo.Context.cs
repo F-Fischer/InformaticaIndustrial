@@ -33,6 +33,7 @@ namespace InformaticaIndustrial.Modelos
         public DbSet<lenguaje> lenguajes { get; set; }
         public DbSet<registro> registros { get; set; }
         public DbSet<rol> rols { get; set; }
+        public DbSet<stock> stocks { get; set; }
         public DbSet<tipo_articulo> tipo_articulo { get; set; }
         public DbSet<tipo_externos> tipo_externos { get; set; }
         public DbSet<unidad_med> unidad_med { get; set; }

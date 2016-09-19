@@ -99,6 +99,9 @@
     <Compile Include="Modelos\rol.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\stock.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Modelos\tipo_articulo.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -135,6 +138,12 @@
     <Compile Include="Vista\BomForm.Designer.cs">
       <DependentUpon>BomForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vista\Deposito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\Deposito.Designer.cs">
+      <DependentUpon>Deposito.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +158,12 @@
     </Compile>
     <Compile Include="Vista\FormInicial.Designer.cs">
       <DependentUpon>FormInicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vista\GenerarStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vista\GenerarStock.Designer.cs">
+      <DependentUpon>GenerarStock.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\MenuPrincipal.cs">
       <SubType>Form</SubType>
@@ -189,8 +204,14 @@
     <EmbeddedResource Include="Vista\BomForm.resx">
       <DependentUpon>BomForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vista\Deposito.resx">
+      <DependentUpon>Deposito.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vista\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vista\GenerarStock.resx">
+      <DependentUpon>GenerarStock.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>

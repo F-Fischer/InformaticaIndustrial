@@ -4,24 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="137df4597efe4a2ba7927c93b0494a77" Name="Diagram1">
-        <EntityTypeShape EntityType="dbModel.art_sustituto" Width="1.5" PointX="9.75" PointY="21" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.articulo" Width="1.5" PointX="7.5" PointY="17.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.bom" Width="1.5" PointX="15" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.descripcion" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.externo" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.lenguaje" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.registro" Width="1.5" PointX="12.75" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.rol" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.tipo_articulo" Width="1.5" PointX="5.25" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.tipo_externos" Width="1.5" PointX="5.25" PointY="22.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.unidad_med" Width="1.5" PointX="5.25" PointY="24.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbModel.usuario" Width="1.5" PointX="10.5" PointY="14.25" IsExpanded="true" />
+      <Diagram DiagramId="43d9a896105b4bc899a2567cd7d8c1ce" Name="Diagram1">
+        <EntityTypeShape EntityType="dbModel.art_sustituto" Width="1.5" PointX="9.75" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.articulo" Width="1.5" PointX="7.5" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.bom" Width="1.5" PointX="15" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.descripcion" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.externo" Width="1.5" PointX="7.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.lenguaje" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.registro" Width="1.5" PointX="12.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.rol" Width="1.5" PointX="5.25" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.stock" Width="1.5" PointX="9.75" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.tipo_articulo" Width="1.5" PointX="5.25" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.tipo_externos" Width="1.5" PointX="5.25" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.unidad_med" Width="1.5" PointX="5.25" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.usuario" Width="1.5" PointX="10.5" PointY="15.75" IsExpanded="true" />
         <AssociationConnector Association="dbModel.principal_id" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.sustituto_id" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.um_id" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.articulo_id_descripcion" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.articulo_id_registro" ManuallyRouted="false" />
+        <AssociationConnector Association="dbModel.articulo_stock" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.articulo_tipo_articulo" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.articulo_um_id" ManuallyRouted="false" />
         <AssociationConnector Association="dbModel.bom_id_hijo" ManuallyRouted="false" />
