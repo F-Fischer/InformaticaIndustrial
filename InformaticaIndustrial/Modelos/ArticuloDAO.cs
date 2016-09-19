@@ -108,6 +108,7 @@ namespace InformaticaIndustrial.Modelos
             }
         }
 
+
         //Explosion
 
         public List<int> getHijos(List<int> idPadres)
@@ -130,14 +131,23 @@ namespace InformaticaIndustrial.Modelos
             using (dbEntities context = new dbEntities())
             {
                 var idHijos = getHijos(id);
-                var arts = context.articuloes
-                    .Where(a => idHijos.Contains(a.articulo_id))
-                    .Select(a => a);
+                if (idHijos == id)
+                {
+                    return null;
+                }
+                else
+                {
+                    var arts = from b in context.boms
+                               where idHijos.Contains(b.articulo_padre)
+                               select new { b.articulo_padre, b.articulo_hijo, b.cantidad, b.um_id }; ;
 
-                return arts.ToList();
+                    return arts.ToList();
+                }
+
 
             }
         }
+
 
         //Implosion
 
@@ -161,11 +171,18 @@ namespace InformaticaIndustrial.Modelos
             using (dbEntities context = new dbEntities())
             {
                 var idPadres = getPadres(id);
-                var arts = context.articuloes
-                    .Where(a => idPadres.Contains(a.articulo_id))
-                    .Select(a => a);
+                if (idPadres == id)
+                {
+                    return null;
+                }
+                else
+                {
+                    var arts = from a in context.articuloes
+                               where idPadres.Contains(a.articulo_id)
+                               select new { a.articulo_id, a.tipo_articulo, a.descripcion_id };
+                    return arts.ToList();
+                }
 
-                return arts.ToList();
 
             }
         }

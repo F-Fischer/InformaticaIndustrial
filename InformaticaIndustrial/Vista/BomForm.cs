@@ -46,10 +46,7 @@ namespace InformaticaIndustrial.Vista
             BomsGrid.DataSource = bDAO.getBoms();
         }
 
-        private void btnVerArticulos_Click(object sender, EventArgs e)
-        {
-        }
-
+       
         private void btnModificar_Click(object sender, EventArgs e)
         {
             int rowindex = BomsGrid.CurrentCell.RowIndex;
@@ -83,6 +80,11 @@ namespace InformaticaIndustrial.Vista
                 dpFecha.Enabled = false;
                 cbNroFecha.Enabled = true;
             }
+        }
+
+        private void btnVerArticulos_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

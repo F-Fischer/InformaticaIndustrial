@@ -29,6 +29,7 @@ namespace InformaticaIndustrial.Vista
             this.mp = mp;
 
             loadListBox();
+            artGridView.AutoGenerateColumns = true;
         }
 
         public void loadListBox()
@@ -92,13 +93,16 @@ namespace InformaticaIndustrial.Vista
             lbArticulos.ValueMember = "articulo_id";
             lbArticulos.DisplayMember = "descripcion_str";
         }
+
         private void btnExplosion_Click(object sender, EventArgs e)
         {
             ArticuloDAO aDAO = new ArticuloDAO();
             int index = (int)this.lbArticulos.SelectedValue;
             List<int> lista = new List<int>();
             lista.Add(index);
-            aDAO.Explosion(lista);
+            //aDAO.Explosion(lista);
+            System.Collections.IList data = aDAO.Explosion(lista);
+            loadArtGridView(data);
         }
 
         private void btnImplosion_Click(object sender, EventArgs e)
@@ -107,7 +111,15 @@ namespace InformaticaIndustrial.Vista
             int index = (int)this.lbArticulos.SelectedValue;
             List<int> lista = new List<int>();
             lista.Add(index);
-            aDAO.Implosion(lista);
+            //aDAO.Implosion(lista);
+            System.Collections.IList data = aDAO.Implosion(lista);
+            loadArtGridView(data);
+        }
+
+        public void loadArtGridView(System.Collections.IList data)
+        {
+            artGridView.DataSource = null;
+            artGridView.DataSource = data;
         }
     }
 }
