@@ -41,9 +41,9 @@ namespace InformaticaIndustrial.Vista
         private void lbArticulos_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             int index = this.lbArticulos.IndexFromPoint(e.Location);
-            System.Collections.IList list = aDAO.getArticuloById(index +1);
+            System.Collections.IList list = aDAO.getArticuloById(index + 1);
             System.Collections.IList listDesc = dDAO.getDescripcionById(((articulo)(list[0])).descripcion_id);
-            System.Collections.IList listTipoArticulo = taDAO.getTipoArticulosById(((articulo)(list[0])).tipo_articulo);
+            System.Collections.IList listTipoArticulo = taDAO.getDescripcionTAById(((articulo)(list[0])).tipo_articulo);
             System.Collections.IList listUnidadMedida = umDAO.getDescripcionUMById(((articulo)(list[0])).unidad_med);
 
             //cbUnidadMedida.DataSource = umDAO.getDescripcionUM();
@@ -99,6 +99,15 @@ namespace InformaticaIndustrial.Vista
             List<int> lista = new List<int>();
             lista.Add(index);
             aDAO.Explosion(lista);
+        }
+
+        private void btnImplosion_Click(object sender, EventArgs e)
+        {
+            ArticuloDAO aDAO = new ArticuloDAO();
+            int index = (int)this.lbArticulos.SelectedValue;
+            List<int> lista = new List<int>();
+            lista.Add(index);
+            aDAO.Implosion(lista);
         }
     }
 }

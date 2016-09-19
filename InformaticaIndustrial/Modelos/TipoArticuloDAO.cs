@@ -34,7 +34,7 @@ namespace InformaticaIndustrial.Modelos
             }
         }
 
-        public System.Collections.IList getTipoArticulosById(int id)
+        public System.Collections.IList getDescripcionTAById(int id)
         {
             using (dbEntities context = new dbEntities())
             {
@@ -43,7 +43,7 @@ namespace InformaticaIndustrial.Modelos
                             from d in context.descripcions
                             where ta.descripcion_id == d.descripcion_id
                             where ta.tipo_id == id
-                            select new { ta.tipo_id, d.descripcion_str };
+                            select d.descripcion_str;
                 return query.ToList();
             }
         }

@@ -30,5 +30,12 @@ namespace InformaticaIndustrial.Vista
             a.Show();
             this.Hide();
         }
+
+        private void btnStock_Click(object sender, EventArgs e)
+        {
+            Stock s = new Stock(this);
+            s.Show();
+            this.Hide();
+        }
     }
 }

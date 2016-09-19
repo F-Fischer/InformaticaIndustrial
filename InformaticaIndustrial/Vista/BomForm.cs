@@ -56,5 +56,10 @@ namespace InformaticaIndustrial.Vista
             ModificarBomForm mbf = new ModificarBomForm((int)BomsGrid.Rows[rowindex].Cells["bom_id"].Value,this);
             mbf.Show();
         }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

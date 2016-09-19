@@ -16,6 +16,7 @@ namespace InformaticaIndustrial.Modelos
     {
         public unidad_med()
         {
+            this.art_sustituto = new HashSet<art_sustituto>();
             this.articuloes = new HashSet<articulo>();
             this.boms = new HashSet<bom>();
         }
@@ -24,6 +25,7 @@ namespace InformaticaIndustrial.Modelos
         public int descripcion_id { get; set; }
         public string factor_n { get; set; }
     
+        public virtual ICollection<art_sustituto> art_sustituto { get; set; }
         public virtual ICollection<articulo> articuloes { get; set; }
         public virtual ICollection<bom> boms { get; set; }
         public virtual descripcion descripcion { get; set; }

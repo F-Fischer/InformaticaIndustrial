@@ -12,23 +12,16 @@ namespace InformaticaIndustrial.Modelos
     using System;
     using System.Collections.Generic;
     
-    public partial class bom
+    public partial class art_sustituto
     {
-        public int bom_id { get; set; }
-        public int articulo_padre { get; set; }
-        public int articulo_hijo { get; set; }
+        public int art_sustituto_id { get; set; }
+        public int id_principal { get; set; }
+        public int id_sustituto { get; set; }
         public float cantidad { get; set; }
-        public System.DateTime fecha_inicio { get; set; }
-        public System.DateTime fecha_fin { get; set; }
-        public int semana_inicio { get; set; }
-        public int semana_fin { get; set; }
-        public int um_id { get; set; }
-        public int activo { get; set; }
-        public int registro_id { get; set; }
+        public int id_um { get; set; }
     
         public virtual articulo articulo { get; set; }
         public virtual articulo articulo1 { get; set; }
-        public virtual registro registro { get; set; }
         public virtual unidad_med unidad_med { get; set; }
     }
 }

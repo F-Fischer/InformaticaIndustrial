@@ -38,7 +38,7 @@ namespace InformaticaIndustrial.Modelos
                             from d in context.descripcions
                             where um.unidad_id == id
                             where um.descripcion_id == d.descripcion_id
-                            select new { um.unidad_id, d.descripcion_str};
+                            select d.descripcion_str;
                 return query.ToList();
             }
         }

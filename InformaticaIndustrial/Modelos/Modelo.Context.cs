@@ -25,6 +25,7 @@ namespace InformaticaIndustrial.Modelos
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<art_sustituto> art_sustituto { get; set; }
         public DbSet<articulo> articuloes { get; set; }
         public DbSet<bom> boms { get; set; }
         public DbSet<descripcion> descripcions { get; set; }

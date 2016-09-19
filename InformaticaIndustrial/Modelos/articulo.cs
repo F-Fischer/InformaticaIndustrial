@@ -16,6 +16,8 @@ namespace InformaticaIndustrial.Modelos
     {
         public articulo()
         {
+            this.art_sustituto = new HashSet<art_sustituto>();
+            this.art_sustituto1 = new HashSet<art_sustituto>();
             this.boms = new HashSet<bom>();
             this.boms1 = new HashSet<bom>();
         }
@@ -30,6 +32,8 @@ namespace InformaticaIndustrial.Modelos
         public Nullable<System.DateTime> fecha_fin { get; set; }
         public Nullable<int> registro_id { get; set; }
     
+        public virtual ICollection<art_sustituto> art_sustituto { get; set; }
+        public virtual ICollection<art_sustituto> art_sustituto1 { get; set; }
         public virtual descripcion descripcion1 { get; set; }
         public virtual registro registro { get; set; }
         public virtual tipo_articulo tipo_articulo1 { get; set; }

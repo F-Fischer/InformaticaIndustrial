@@ -29,17 +29,22 @@
         private void InitializeComponent()
         {
             this.BomsGrid = new System.Windows.Forms.DataGridView();
-            this.bom_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.articulo_padre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.articulo_hijo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fecha_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.um_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.agregarBom = new System.Windows.Forms.Button();
             this.btnEliminarBom = new System.Windows.Forms.Button();
             this.btnVerArticulos = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.dpFecha = new System.Windows.Forms.DateTimePicker();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.bom_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.articulo_padre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.articulo_hijo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.um_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.semana_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.semana_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.BomsGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,14 +56,78 @@
             this.articulo_padre,
             this.articulo_hijo,
             this.cantidad,
+            this.um_id,
             this.fecha_inicio,
-            this.um_id});
-            this.BomsGrid.Location = new System.Drawing.Point(9, 10);
-            this.BomsGrid.Margin = new System.Windows.Forms.Padding(2);
+            this.semana_inicio,
+            this.semana_fin,
+            this.activo});
+            this.BomsGrid.Location = new System.Drawing.Point(12, 12);
+            this.BomsGrid.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BomsGrid.Name = "BomsGrid";
             this.BomsGrid.RowTemplate.Height = 24;
-            this.BomsGrid.Size = new System.Drawing.Size(774, 246);
+            this.BomsGrid.Size = new System.Drawing.Size(1032, 303);
             this.BomsGrid.TabIndex = 0;
+            // 
+            // agregarBom
+            // 
+            this.agregarBom.Location = new System.Drawing.Point(12, 321);
+            this.agregarBom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.agregarBom.Name = "agregarBom";
+            this.agregarBom.Size = new System.Drawing.Size(121, 42);
+            this.agregarBom.TabIndex = 1;
+            this.agregarBom.Text = "Agregar";
+            this.agregarBom.UseVisualStyleBackColor = true;
+            this.agregarBom.Click += new System.EventHandler(this.agregarBom_Click);
+            // 
+            // btnEliminarBom
+            // 
+            this.btnEliminarBom.Location = new System.Drawing.Point(260, 321);
+            this.btnEliminarBom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEliminarBom.Name = "btnEliminarBom";
+            this.btnEliminarBom.Size = new System.Drawing.Size(115, 42);
+            this.btnEliminarBom.TabIndex = 2;
+            this.btnEliminarBom.Text = "Eliminar";
+            this.btnEliminarBom.UseVisualStyleBackColor = true;
+            this.btnEliminarBom.Click += new System.EventHandler(this.btnEliminarBom_Click);
+            // 
+            // btnVerArticulos
+            // 
+            this.btnVerArticulos.Location = new System.Drawing.Point(901, 321);
+            this.btnVerArticulos.Margin = new System.Windows.Forms.Padding(4);
+            this.btnVerArticulos.Name = "btnVerArticulos";
+            this.btnVerArticulos.Size = new System.Drawing.Size(143, 41);
+            this.btnVerArticulos.TabIndex = 3;
+            this.btnVerArticulos.Text = "Ver Articulos";
+            this.btnVerArticulos.UseVisualStyleBackColor = true;
+            this.btnVerArticulos.Click += new System.EventHandler(this.btnVerArticulos_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Location = new System.Drawing.Point(140, 321);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(113, 42);
+            this.btnModificar.TabIndex = 4;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // dpFecha
+            // 
+            this.dpFecha.Location = new System.Drawing.Point(401, 340);
+            this.dpFecha.Name = "dpFecha";
+            this.dpFecha.Size = new System.Drawing.Size(200, 22);
+            this.dpFecha.TabIndex = 6;
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(622, 322);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(115, 41);
+            this.btnBuscar.TabIndex = 7;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // bom_id
             // 
@@ -84,71 +153,49 @@
             this.cantidad.HeaderText = "Cantidad";
             this.cantidad.Name = "cantidad";
             // 
-            // fecha_inicio
-            // 
-            this.fecha_inicio.DataPropertyName = "fecha_inicio";
-            this.fecha_inicio.HeaderText = "Fecha Creación";
-            this.fecha_inicio.Name = "fecha_inicio";
-            // 
             // um_id
             // 
             this.um_id.DataPropertyName = "um_id";
             this.um_id.HeaderText = "Unidad de Medida";
             this.um_id.Name = "um_id";
             // 
-            // agregarBom
+            // fecha_inicio
             // 
-            this.agregarBom.Location = new System.Drawing.Point(9, 261);
-            this.agregarBom.Margin = new System.Windows.Forms.Padding(2);
-            this.agregarBom.Name = "agregarBom";
-            this.agregarBom.Size = new System.Drawing.Size(91, 34);
-            this.agregarBom.TabIndex = 1;
-            this.agregarBom.Text = "Agregar";
-            this.agregarBom.UseVisualStyleBackColor = true;
-            this.agregarBom.Click += new System.EventHandler(this.agregarBom_Click);
+            this.fecha_inicio.DataPropertyName = "fecha_inicio";
+            this.fecha_inicio.HeaderText = "Fecha Creación";
+            this.fecha_inicio.Name = "fecha_inicio";
             // 
-            // btnEliminarBom
+            // semana_inicio
             // 
-            this.btnEliminarBom.Location = new System.Drawing.Point(195, 261);
-            this.btnEliminarBom.Margin = new System.Windows.Forms.Padding(2);
-            this.btnEliminarBom.Name = "btnEliminarBom";
-            this.btnEliminarBom.Size = new System.Drawing.Size(86, 34);
-            this.btnEliminarBom.TabIndex = 2;
-            this.btnEliminarBom.Text = "Eliminar";
-            this.btnEliminarBom.UseVisualStyleBackColor = true;
-            this.btnEliminarBom.Click += new System.EventHandler(this.btnEliminarBom_Click);
+            this.semana_inicio.DataPropertyName = "semana_inicio";
+            this.semana_inicio.HeaderText = "Semana Inicio";
+            this.semana_inicio.Name = "semana_inicio";
             // 
-            // btnVerArticulos
+            // semana_fin
             // 
-            this.btnVerArticulos.Location = new System.Drawing.Point(676, 261);
-            this.btnVerArticulos.Name = "btnVerArticulos";
-            this.btnVerArticulos.Size = new System.Drawing.Size(107, 33);
-            this.btnVerArticulos.TabIndex = 3;
-            this.btnVerArticulos.Text = "Ver Articulos";
-            this.btnVerArticulos.UseVisualStyleBackColor = true;
-            this.btnVerArticulos.Click += new System.EventHandler(this.btnVerArticulos_Click);
+            this.semana_fin.DataPropertyName = "semana_fin";
+            this.semana_fin.HeaderText = "Semana Fin";
+            this.semana_fin.Name = "semana_fin";
             // 
-            // btnModificar
+            // activo
             // 
-            this.btnModificar.Location = new System.Drawing.Point(105, 261);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(85, 34);
-            this.btnModificar.TabIndex = 4;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            this.activo.DataPropertyName = "activo";
+            this.activo.HeaderText = "Activo";
+            this.activo.Name = "activo";
             // 
             // BomForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 355);
+            this.ClientSize = new System.Drawing.Size(1056, 437);
+            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.dpFecha);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnVerArticulos);
             this.Controls.Add(this.btnEliminarBom);
             this.Controls.Add(this.agregarBom);
             this.Controls.Add(this.BomsGrid);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "BomForm";
             this.Text = "BomForm";
             ((System.ComponentModel.ISupportInitialize)(this.BomsGrid)).EndInit();
@@ -162,13 +209,18 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button agregarBom;
         private System.Windows.Forms.Button btnEliminarBom;
+        private System.Windows.Forms.Button btnVerArticulos;
+        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.DateTimePicker dpFecha;
+        private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.DataGridViewTextBoxColumn bom_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn articulo_padre;
         private System.Windows.Forms.DataGridViewTextBoxColumn articulo_hijo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fecha_inicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn um_id;
-        private System.Windows.Forms.Button btnVerArticulos;
-        private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fecha_inicio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn semana_inicio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn semana_fin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn activo;
     }
 }
