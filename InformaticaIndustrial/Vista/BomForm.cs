@@ -13,10 +13,13 @@ namespace InformaticaIndustrial.Vista
 {
     public partial class BomForm : Form
     {
+        private BomDAO bDAO;
+
         public BomForm()
         {
             InitializeComponent();
             BomsGrid.AutoGenerateColumns = false;
+            this.bDAO = new BomDAO();
             this.loadBomGrid();
 
         }
@@ -32,7 +35,6 @@ namespace InformaticaIndustrial.Vista
             int rowindex = BomsGrid.CurrentCell.RowIndex;
             int id = (int)BomsGrid.Rows[rowindex].Cells["bom_id"].Value;
 
-            BomDAO bDAO = new BomDAO();
             bDAO.deleteBom(id);
             loadBomGrid();
         }
@@ -54,7 +56,30 @@ namespace InformaticaIndustrial.Vista
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            
+            if (chkNroSemana.Checked == true)
+            {
+                BomsGrid.DataSource = null;
+                BomsGrid.DataSource = bDAO.getBomsByWeek(int.Parse((cbNroFecha.SelectedItem).ToString()));
+            }
+            else
+            {
+                BomsGrid.DataSource = null;
+                BomsGrid.DataSource = bDAO.getBomsByWeek(dpFecha.Value);
+            }
+        }
+
+        private void chkNroSemana_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkNroSemana.Checked == false)
+            {
+                dpFecha.Enabled = true;
+                cbNroFecha.Enabled = false;
+            }
+            else
+            {
+                dpFecha.Enabled = false;
+                cbNroFecha.Enabled = true;
+            }
         }
     }
 }
