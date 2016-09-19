@@ -77,40 +77,6 @@ namespace InformaticaIndustrial.Modelos
             }
         }
 
-        public void addArticulo(int descripcionId, float precioStd, string descripcion, int tipoArticulo, int um, int registro)
-        {
-            using (dbEntities context = new dbEntities())
-            {
-                articulo art = new articulo();
-                art.descripcion_id = descripcionId;
-                art.precio_std = precioStd;
-                art.descripcion = descripcion;
-                art.tipo_articulo = tipoArticulo;
-                art.unidad_med = um;
-                art.registro_id = registro;
-                context.articuloes.Add(art);
-                context.SaveChanges();
-            }
-        }
-
-        public System.Collections.IList getRelacionesPadre(int id)
-        {
-            using (dbEntities context = new dbEntities())
-            {
-                var query = from b in context.boms where b.articulo_hijo == id select b.articulo_padre;
-                return query.ToArray<int>();
-            }
-        }
-
-        public System.Collections.IList getRelacionesHijo(int id)
-        {
-            using (dbEntities context = new dbEntities())
-            {
-                var query = from b in context.boms where b.articulo_padre == id select b.articulo_hijo;
-                return query.ToArray<int>();
-            }
-        }
-
         public System.Collections.IList getBomsByWeek(int week)
         {
             using (dbEntities context = new dbEntities())
