@@ -82,5 +82,28 @@ namespace InformaticaIndustrial.Modelos
             var day = (int)CultureInfo.CurrentCulture.Calendar.GetDayOfWeek(date);
             return CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(date.AddDays(4 - (day == 0 ? 7 : day)), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
         }
+
+        public System.Collections.IList getBomsByWeek(int week)
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                var query = from b in context.boms
+                            where b.semana_inicio == week
+                            select b;
+                return query.ToList();
+            }
+        }
+
+        public System.Collections.IList getBomsByWeek(DateTime date)
+        {
+            int week = WeekOfTheYear(date);
+            using (dbEntities context = new dbEntities())
+            {
+                var query = from b in context.boms
+                            where b.semana_inicio == week
+                            select b;
+                return query.ToList();
+            }
+        }
     }
 }

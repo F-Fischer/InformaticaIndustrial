@@ -81,5 +81,10 @@ namespace InformaticaIndustrial.Vista
                 cbNroFecha.Enabled = true;
             }
         }
+
+        private void btnVerArticulos_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
