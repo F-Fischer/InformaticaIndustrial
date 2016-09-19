@@ -111,7 +111,28 @@ namespace InformaticaIndustrial.Modelos
             }
         }
 
+        public System.Collections.IList getBomsByWeek(int week)
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                var query = from b in context.boms
+                            where b.semana_inicio == week
+                            select b;
+                return query.ToList();
+            }
+        }
 
+        public System.Collections.IList getBomsByWeek(DateTime date)
+        {
+            int week = WeekOfTheYear(date);
+            using (dbEntities context = new dbEntities())
+            {
+                var query = from b in context.boms
+                            where b.semana_inicio == week
+                            select b;
+                return query.ToList();
+            }
+        }
 
         private int WeekOfTheYear(DateTime date)
         {

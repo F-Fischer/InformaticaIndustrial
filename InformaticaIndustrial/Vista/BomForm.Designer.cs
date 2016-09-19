@@ -45,6 +45,8 @@
             this.semana_inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.semana_fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkNroSemana = new System.Windows.Forms.CheckBox();
+            this.cbNroFecha = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.BomsGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,14 +116,14 @@
             // 
             // dpFecha
             // 
-            this.dpFecha.Location = new System.Drawing.Point(401, 340);
+            this.dpFecha.Location = new System.Drawing.Point(401, 329);
             this.dpFecha.Name = "dpFecha";
-            this.dpFecha.Size = new System.Drawing.Size(200, 22);
+            this.dpFecha.Size = new System.Drawing.Size(239, 22);
             this.dpFecha.TabIndex = 6;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(622, 322);
+            this.btnBuscar.Location = new System.Drawing.Point(677, 322);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(115, 41);
             this.btnBuscar.TabIndex = 7;
@@ -183,11 +185,87 @@
             this.activo.HeaderText = "Activo";
             this.activo.Name = "activo";
             // 
+            // chkNroSemana
+            // 
+            this.chkNroSemana.AutoSize = true;
+            this.chkNroSemana.Location = new System.Drawing.Point(401, 358);
+            this.chkNroSemana.Name = "chkNroSemana";
+            this.chkNroSemana.Size = new System.Drawing.Size(135, 21);
+            this.chkNroSemana.TabIndex = 8;
+            this.chkNroSemana.Text = "Por Nro Semana";
+            this.chkNroSemana.UseVisualStyleBackColor = true;
+            this.chkNroSemana.CheckedChanged += new System.EventHandler(this.chkNroSemana_CheckedChanged);
+            // 
+            // cbNroFecha
+            // 
+            this.cbNroFecha.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbNroFecha.Enabled = false;
+            this.cbNroFecha.FormattingEnabled = true;
+            this.cbNroFecha.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50",
+            "52",
+            "53"});
+            this.cbNroFecha.Location = new System.Drawing.Point(543, 358);
+            this.cbNroFecha.Name = "cbNroFecha";
+            this.cbNroFecha.Size = new System.Drawing.Size(97, 24);
+            this.cbNroFecha.TabIndex = 9;
+            // 
             // BomForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1056, 437);
+            this.Controls.Add(this.cbNroFecha);
+            this.Controls.Add(this.chkNroSemana);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.dpFecha);
             this.Controls.Add(this.btnModificar);
@@ -200,6 +278,7 @@
             this.Text = "BomForm";
             ((System.ComponentModel.ISupportInitialize)(this.BomsGrid)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -222,5 +301,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn semana_inicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn semana_fin;
         private System.Windows.Forms.DataGridViewTextBoxColumn activo;
+        private System.Windows.Forms.CheckBox chkNroSemana;
+        private System.Windows.Forms.ComboBox cbNroFecha;
     }
 }
