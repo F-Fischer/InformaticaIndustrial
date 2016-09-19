@@ -41,7 +41,7 @@ namespace InformaticaIndustrial.Vista
         private void lbArticulos_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             int index = this.lbArticulos.IndexFromPoint(e.Location);
-            System.Collections.IList list = aDAO.getArticuloById(index +1);
+            System.Collections.IList list = aDAO.getArticuloById(index + 1);
             System.Collections.IList listDesc = dDAO.getDescripcionById(((articulo)(list[0])).descripcion_id);
             System.Collections.IList listTipoArticulo = taDAO.getDescripcionTAById(((articulo)(list[0])).tipo_articulo);
             System.Collections.IList listUnidadMedida = umDAO.getDescripcionUMById(((articulo)(list[0])).unidad_med);

@@ -19,8 +19,11 @@ namespace InformaticaIndustrial.Modelos
         public int articulo_hijo { get; set; }
         public float cantidad { get; set; }
         public System.DateTime fecha_inicio { get; set; }
-        public Nullable<System.DateTime> fecha_fin { get; set; }
+        public System.DateTime fecha_fin { get; set; }
+        public int semana_inicio { get; set; }
+        public int semana_fin { get; set; }
         public int um_id { get; set; }
+        public int activo { get; set; }
         public int registro_id { get; set; }
         public int semana_inicio { get; set; }
         public int semana_fin { get; set; }
