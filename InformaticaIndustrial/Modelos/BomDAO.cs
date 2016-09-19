@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,10 @@ namespace InformaticaIndustrial.Modelos
             {
                 RegistroDAO rDAO = new RegistroDAO();
                 bom.registro_id = rDAO.addRegistro();
+                //bom.registro_id = 1;
+                bom.activo = 1;
+                bom.semana_inicio = WeekOfTheYear(bom.fecha_inicio);
+                bom.semana_fin = WeekOfTheYear(bom.fecha_fin);
                 context.boms.Add(bom);
                 context.SaveChanges();
             }
@@ -45,8 +50,9 @@ namespace InformaticaIndustrial.Modelos
             {
                 RegistroDAO rDAO = new RegistroDAO();
                 bom bom = context.boms.First(b => b.bom_id == id);
-                bom.fecha_fin = System.DateTime.Now;
-                bom.registro_id = rDAO.addRegistro();
+                //bom.registro_id = rDAO.addRegistro();
+                bom.registro_id = 1;
+                bom.activo = 0;
                 ((IObjectContextAdapter)context).ObjectContext.ApplyCurrentValues("boms", bom);
                 context.SaveChanges();
             }
@@ -71,5 +77,10 @@ namespace InformaticaIndustrial.Modelos
             }
         }
 
+        private int WeekOfTheYear(DateTime date)
+        {
+            var day = (int)CultureInfo.CurrentCulture.Calendar.GetDayOfWeek(date);
+            return CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(date.AddDays(4 - (day == 0 ? 7 : day)), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        }
     }
 }

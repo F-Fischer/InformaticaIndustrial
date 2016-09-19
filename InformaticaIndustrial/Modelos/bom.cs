@@ -25,9 +25,6 @@ namespace InformaticaIndustrial.Modelos
         public int um_id { get; set; }
         public int activo { get; set; }
         public int registro_id { get; set; }
-        public int semana_inicio { get; set; }
-        public int semana_fin { get; set; }
-        public int activo { get; set; }
     
         public virtual articulo articulo { get; set; }
         public virtual articulo articulo1 { get; set; }

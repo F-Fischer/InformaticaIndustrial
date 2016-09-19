@@ -20,8 +20,6 @@ namespace InformaticaIndustrial.Modelos
             this.art_sustituto1 = new HashSet<art_sustituto>();
             this.boms = new HashSet<bom>();
             this.boms1 = new HashSet<bom>();
-            this.art_sustituto = new HashSet<art_sustituto>();
-            this.art_sustituto1 = new HashSet<art_sustituto>();
         }
     
         public int articulo_id { get; set; }
@@ -42,7 +40,5 @@ namespace InformaticaIndustrial.Modelos
         public virtual unidad_med unidad_med1 { get; set; }
         public virtual ICollection<bom> boms { get; set; }
         public virtual ICollection<bom> boms1 { get; set; }
-        public virtual ICollection<art_sustituto> art_sustituto { get; set; }
-        public virtual ICollection<art_sustituto> art_sustituto1 { get; set; }
     }
 }
