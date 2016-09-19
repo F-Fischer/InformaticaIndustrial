@@ -126,7 +126,7 @@
             this.btnVerArticulos.TabIndex = 3;
             this.btnVerArticulos.Text = "Ver Articulos";
             this.btnVerArticulos.UseVisualStyleBackColor = true;
-            this.btnVerArticulos.Click += new System.EventHandler(this.btnVerArticulos_Click);
+            
             // 
             // btnModificar
             // 

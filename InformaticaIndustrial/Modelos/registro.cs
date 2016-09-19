@@ -18,9 +18,6 @@ namespace InformaticaIndustrial.Modelos
         {
             this.articuloes = new HashSet<articulo>();
             this.boms = new HashSet<bom>();
-
-            this.terminal = "local";
-            this.usuario_id = 1;
         }
     
         public int registro_id { get; set; }

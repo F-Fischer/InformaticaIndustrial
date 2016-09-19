@@ -218,7 +218,9 @@
             this.btnImplosion.Name = "btnImplosion";
             this.btnImplosion.Size = new System.Drawing.Size(136, 23);
             this.btnImplosion.TabIndex = 13;
+            this.btnImplosion.Text = "Implosion";
             this.btnImplosion.UseVisualStyleBackColor = true;
+            this.btnImplosion.Click += new System.EventHandler(this.btnImplosion_Click);
             // 
             // Articulos
             // 

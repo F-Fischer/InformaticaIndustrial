@@ -36,5 +36,6 @@ namespace InformaticaIndustrial.Modelos
         public DbSet<tipo_externos> tipo_externos { get; set; }
         public DbSet<unidad_med> unidad_med { get; set; }
         public DbSet<usuario> usuarios { get; set; }
+        public DbSet<art_sustituto> art_sustituto { get; set; }
     }
 }

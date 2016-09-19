@@ -108,44 +108,8 @@ namespace InformaticaIndustrial.Modelos
             }
         }
 
-        public System.Collections.IList mostrarPadres(int id)
-        {
-            BomDAO bDAO = new BomDAO();
 
-            System.Collections.IList IdPadres = bDAO.getRelacionesPadre(id);
-            System.Collections.IList articulosPadre = new List<articulo>();
-
-            using (dbEntities context = new dbEntities())
-            {
-
-                foreach (int p in IdPadres)
-                {
-                    var art = from a in context.articuloes where a.articulo_id == p select a;
-                    articulosPadre.Add(art);
-                }
-                return articulosPadre;
-            }   
-        }
-
-        public System.Collections.IList mostrarHijos(int id)
-        {
-            BomDAO bDAO = new BomDAO();
-
-            System.Collections.IList idHijos = bDAO.getRelacionesHijo(id);
-            System.Collections.IList articulosHijo = new List<articulo>();
-
-            using (dbEntities context = new dbEntities())
-            {
-                foreach (int p in idHijos)
-                {
-                    var art = from a in context.articuloes where a.articulo_id == p select a;
-                    articulosHijo.Add((articulo)art);
-                }
-                return articulosHijo;
-            }
-        }
-
-        
+        //Explosion
 
         public List<int> getHijos(List<int> idPadres)
         {
@@ -169,6 +133,38 @@ namespace InformaticaIndustrial.Modelos
                 var idHijos = getHijos(id);
                 var arts = context.articuloes
                     .Where(a => idHijos.Contains(a.articulo_id))
+                    .Select(a => a);
+
+                return arts.ToList();
+
+            }
+        }
+
+
+        //Implosion
+
+        public List<int> getPadres(List<int> idHijos)
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                var idPadres = context.boms
+                    .Where(padre => idHijos.Contains(padre.articulo_hijo))
+                    .Select(padre => padre.articulo_padre)
+                    .ToList();
+                if (idPadres.Count == 0)
+                    return idHijos;
+                else
+                    return getPadres(idPadres);
+            }
+        }
+
+        public System.Collections.IList Implosion(List<int> id)
+        {
+            using (dbEntities context = new dbEntities())
+            {
+                var idPadres = getPadres(id);
+                var arts = context.articuloes
+                    .Where(a => idPadres.Contains(a.articulo_id))
                     .Select(a => a);
 
                 return arts.ToList();

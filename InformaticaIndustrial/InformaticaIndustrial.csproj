@@ -58,6 +58,9 @@
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\ArticuloDAO.cs" />
+    <Compile Include="Modelos\art_sustituto.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Modelos\bom.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
@@ -95,12 +98,6 @@
     </Compile>
     <Compile Include="Vista\BomForm.Designer.cs">
       <DependentUpon>BomForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vista\ExplosionImplosionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vista\ExplosionImplosionForm.Designer.cs">
-      <DependentUpon>ExplosionImplosionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Vista\Form1.cs">
       <SubType>Form</SubType>
@@ -191,9 +188,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\BomForm.resx">
       <DependentUpon>BomForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Vista\ExplosionImplosionForm.resx">
-      <DependentUpon>ExplosionImplosionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vista\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

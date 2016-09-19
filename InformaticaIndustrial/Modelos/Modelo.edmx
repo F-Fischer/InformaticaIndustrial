@@ -5,13 +5,23 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="dbModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="art_sustituto">
+          <Key>
+            <PropertyRef Name="art_sustituto_id" />
+          </Key>
+          <Property Name="art_sustituto_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_principal" Type="int" Nullable="false" />
+          <Property Name="id_sustituto" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="float" Nullable="false" />
+          <Property Name="id_um" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="articulo">
           <Key>
             <PropertyRef Name="articulo_id" />
           </Key>
           <Property Name="articulo_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion_id" Type="int" Nullable="false" />
-          <Property Name="precio_std" Type="float" />
+          <Property Name="precio_std" Type="float" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="50" />
           <Property Name="tipo_articulo" Type="int" Nullable="false" />
           <Property Name="unidad_med" Type="int" Nullable="false" />
@@ -27,9 +37,12 @@
           <Property Name="articulo_padre" Type="int" Nullable="false" />
           <Property Name="articulo_hijo" Type="int" Nullable="false" />
           <Property Name="cantidad" Type="float" Nullable="false" />
-          <Property Name="fecha_inicio" Type="datetime" Precision="0" Nullable="false" />
-          <Property Name="fecha_fin" Type="datetime" Precision="0" />
+          <Property Name="fecha_inicio" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_fin" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="semana_inicio" Type="int" Nullable="false" />
+          <Property Name="semana_fin" Type="int" Nullable="false" />
           <Property Name="um_id" Type="int" Nullable="false" />
+          <Property Name="activo" Type="int" Nullable="false" />
           <Property Name="registro_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="descripcion">
@@ -65,7 +78,7 @@
             <PropertyRef Name="registro_id" />
           </Key>
           <Property Name="registro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fecha_mod" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="fecha_mod" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="terminal" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="usuario_id" Type="int" Nullable="false" />
         </EntityType>
@@ -255,6 +268,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="principal_id">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1" />
+          <End Role="art_sustituto" Type="Self.art_sustituto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="articulo_id" />
+            </Principal>
+            <Dependent Role="art_sustituto">
+              <PropertyRef Name="id_principal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="rol_ibfk_1">
           <End Role="descripcion" Type="Self.descripcion" Multiplicity="1" />
           <End Role="rol" Type="Self.rol" Multiplicity="*" />
@@ -264,6 +289,18 @@
             </Principal>
             <Dependent Role="rol">
               <PropertyRef Name="descripcion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sustituto_id">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1" />
+          <End Role="art_sustituto" Type="Self.art_sustituto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="articulo_id" />
+            </Principal>
+            <Dependent Role="art_sustituto">
+              <PropertyRef Name="id_sustituto" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -303,6 +340,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="um_id">
+          <End Role="unidad_med" Type="Self.unidad_med" Multiplicity="1" />
+          <End Role="art_sustituto" Type="Self.art_sustituto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unidad_med">
+              <PropertyRef Name="unidad_id" />
+            </Principal>
+            <Dependent Role="art_sustituto">
+              <PropertyRef Name="id_um" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="usuario_leng">
           <End Role="lenguaje" Type="Self.lenguaje" Multiplicity="0..1" />
           <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
@@ -328,6 +377,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="dbModelStoreContainer">
+          <EntitySet Name="art_sustituto" EntityType="Self.art_sustituto" Schema="db_ii" store:Type="Tables" />
           <EntitySet Name="articulo" EntityType="Self.articulo" Schema="db_ii" store:Type="Tables" />
           <EntitySet Name="bom" EntityType="Self.bom" Schema="db_ii" store:Type="Tables" />
           <EntitySet Name="descripcion" EntityType="Self.descripcion" Schema="db_ii" store:Type="Tables" />
@@ -387,9 +437,17 @@
             <End Role="lenguaje" EntitySet="lenguaje" />
             <End Role="descripcion" EntitySet="descripcion" />
           </AssociationSet>
+          <AssociationSet Name="principal_id" Association="Self.principal_id">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="art_sustituto" EntitySet="art_sustituto" />
+          </AssociationSet>
           <AssociationSet Name="rol_ibfk_1" Association="Self.rol_ibfk_1">
             <End Role="descripcion" EntitySet="descripcion" />
             <End Role="rol" EntitySet="rol" />
+          </AssociationSet>
+          <AssociationSet Name="sustituto_id" Association="Self.sustituto_id">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="art_sustituto" EntitySet="art_sustituto" />
           </AssociationSet>
           <AssociationSet Name="tipo_articulo_desc" Association="Self.tipo_articulo_desc">
             <End Role="descripcion" EntitySet="descripcion" />
@@ -402,6 +460,10 @@
           <AssociationSet Name="um_desc" Association="Self.um_desc">
             <End Role="descripcion" EntitySet="descripcion" />
             <End Role="unidad_med" EntitySet="unidad_med" />
+          </AssociationSet>
+          <AssociationSet Name="um_id" Association="Self.um_id">
+            <End Role="unidad_med" EntitySet="unidad_med" />
+            <End Role="art_sustituto" EntitySet="art_sustituto" />
           </AssociationSet>
           <AssociationSet Name="usuario_leng" Association="Self.usuario_leng">
             <End Role="lenguaje" EntitySet="lenguaje" />
@@ -435,6 +497,8 @@
           <NavigationProperty Name="unidad_med1" Relationship="Self.articulo_um_id" FromRole="articulo" ToRole="unidad_med" />
           <NavigationProperty Name="boms" Relationship="Self.bom_id_hijo" FromRole="articulo" ToRole="bom" />
           <NavigationProperty Name="boms1" Relationship="Self.bom_id_padre" FromRole="articulo" ToRole="bom" />
+          <NavigationProperty Name="art_sustituto" Relationship="dbModel.principal_id" FromRole="articulo" ToRole="art_sustituto" />
+          <NavigationProperty Name="art_sustituto1" Relationship="dbModel.sustituto_id" FromRole="articulo" ToRole="art_sustituto" />
         </EntityType>
         <EntityType Name="bom">
           <Key>
@@ -452,6 +516,9 @@
           <NavigationProperty Name="articulo1" Relationship="Self.bom_id_padre" FromRole="bom" ToRole="articulo" />
           <NavigationProperty Name="registro" Relationship="Self.bom_registro" FromRole="bom" ToRole="registros" />
           <NavigationProperty Name="unidad_med" Relationship="Self.bom_um" FromRole="bom" ToRole="unidad_med" />
+          <Property Name="semana_inicio" Type="Int32" Nullable="false" />
+          <Property Name="semana_fin" Type="Int32" Nullable="false" />
+          <Property Name="activo" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="descripcion">
           <Key>
@@ -541,6 +608,7 @@
           <NavigationProperty Name="articuloes" Relationship="Self.articulo_um_id" FromRole="unidad_med" ToRole="articulo" />
           <NavigationProperty Name="boms" Relationship="Self.bom_um" FromRole="unidad_med" ToRole="bom" />
           <NavigationProperty Name="descripcion" Relationship="Self.um_desc" FromRole="unidad_med" ToRole="descripcion" />
+          <NavigationProperty Name="art_sustituto" Relationship="dbModel.um_id" FromRole="unidad_med" ToRole="art_sustituto" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
@@ -858,7 +926,69 @@
             <End Role="rol" EntitySet="rols" />
             <End Role="usuarios" EntitySet="usuarios" />
           </AssociationSet>
+          <EntitySet Name="art_sustituto" EntityType="dbModel.art_sustituto" />
+          <AssociationSet Name="principal_id" Association="dbModel.principal_id">
+            <End Role="articulo" EntitySet="articuloes" />
+            <End Role="art_sustituto" EntitySet="art_sustituto" />
+          </AssociationSet>
+          <AssociationSet Name="sustituto_id" Association="dbModel.sustituto_id">
+            <End Role="articulo" EntitySet="articuloes" />
+            <End Role="art_sustituto" EntitySet="art_sustituto" />
+          </AssociationSet>
+          <AssociationSet Name="um_id" Association="dbModel.um_id">
+            <End Role="unidad_med" EntitySet="unidad_med" />
+            <End Role="art_sustituto" EntitySet="art_sustituto" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="art_sustituto">
+          <Key>
+            <PropertyRef Name="art_sustituto_id" />
+          </Key>
+          <Property Name="art_sustituto_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_principal" Type="Int32" Nullable="false" />
+          <Property Name="id_sustituto" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Single" Nullable="false" />
+          <Property Name="id_um" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="articulo" Relationship="dbModel.principal_id" FromRole="art_sustituto" ToRole="articulo" />
+          <NavigationProperty Name="articulo1" Relationship="dbModel.sustituto_id" FromRole="art_sustituto" ToRole="articulo" />
+          <NavigationProperty Name="unidad_med" Relationship="dbModel.um_id" FromRole="art_sustituto" ToRole="unidad_med" />
+        </EntityType>
+        <Association Name="principal_id">
+          <End Type="dbModel.articulo" Role="articulo" Multiplicity="1" />
+          <End Type="dbModel.art_sustituto" Role="art_sustituto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="articulo_id" />
+            </Principal>
+            <Dependent Role="art_sustituto">
+              <PropertyRef Name="id_principal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="sustituto_id">
+          <End Type="dbModel.articulo" Role="articulo" Multiplicity="1" />
+          <End Type="dbModel.art_sustituto" Role="art_sustituto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="articulo_id" />
+            </Principal>
+            <Dependent Role="art_sustituto">
+              <PropertyRef Name="id_sustituto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="um_id">
+          <End Type="dbModel.unidad_med" Role="unidad_med" Multiplicity="1" />
+          <End Type="dbModel.art_sustituto" Role="art_sustituto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unidad_med">
+              <PropertyRef Name="unidad_id" />
+            </Principal>
+            <Dependent Role="art_sustituto">
+              <PropertyRef Name="id_um" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -883,6 +1013,9 @@
           <EntitySetMapping Name="boms">
             <EntityTypeMapping TypeName="dbModel.bom">
               <MappingFragment StoreEntitySet="bom">
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="semana_fin" ColumnName="semana_fin" />
+                <ScalarProperty Name="semana_inicio" ColumnName="semana_inicio" />
                 <ScalarProperty Name="bom_id" ColumnName="bom_id" />
                 <ScalarProperty Name="articulo_padre" ColumnName="articulo_padre" />
                 <ScalarProperty Name="articulo_hijo" ColumnName="articulo_hijo" />
@@ -979,6 +1112,17 @@
                 <ScalarProperty Name="interno" ColumnName="interno" />
                 <ScalarProperty Name="mail" ColumnName="mail" />
                 <ScalarProperty Name="lenguaje_id" ColumnName="lenguaje_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="art_sustituto">
+            <EntityTypeMapping TypeName="dbModel.art_sustituto">
+              <MappingFragment StoreEntitySet="art_sustituto">
+                <ScalarProperty Name="id_um" ColumnName="id_um" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="id_sustituto" ColumnName="id_sustituto" />
+                <ScalarProperty Name="id_principal" ColumnName="id_principal" />
+                <ScalarProperty Name="art_sustituto_id" ColumnName="art_sustituto_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
